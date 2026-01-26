@@ -10,10 +10,10 @@ public class PlayerMovementScript : MonoBehaviour
     private Vector2 _lastMovement;
     public bool canMove = true;
 
-    private void OnEnable()
+    private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        Debug.Log("OnEnable");
+        Debug.Log("Awake");
         _moveAction = InputSystem.actions.FindAction("Move");
         Debug.Log(_moveAction);
     }

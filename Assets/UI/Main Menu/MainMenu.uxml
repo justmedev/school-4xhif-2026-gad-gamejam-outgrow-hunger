@@ -1,0 +1,13 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Main%20Menu/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=002115899abc1014d8549fb254dca04e&amp;type=3#MainMenuStyle"/>
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement name="" style="flex-grow: 0;">
+            <ui:Label text="MAIN MENU&#10;" name="MainMenuText" style="-unity-font-definition: url(&quot;project://database/Assets/Font/m6x11plus.ttf?fileID=12800000&amp;guid=f2e34ae4be0066f4fa4bdc7bfd7e9af1&amp;type=3#m6x11plus&quot;); font-size: 200%; -unity-text-align: upper-center; text-overflow: clip; white-space: normal; color: rgb(251, 191, 191); -unity-text-outline-width: 5px; -unity-text-outline-color: rgb(255, 140, 140);"/>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; flex-shrink: 1; flex-direction: column; flex-wrap: nowrap; align-items: center; justify-content: flex-start; align-self: center; align-content: flex-start;">
+            <ui:Button text="Start" name="StartButton"/>
+            <ui:Button text="Setting&#10;" name="SettingsButton"/>
+            <ui:Button text="Exit&#10;" name="ExitButton"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
