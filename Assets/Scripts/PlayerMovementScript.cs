@@ -8,6 +8,7 @@ public class PlayerMovementScript : MonoBehaviour
     private InputAction _moveAction;
     private Rigidbody2D _rb;
     private Vector2 _lastMovement;
+    public bool canMove = true;
 
     private void OnEnable()
     {
@@ -19,15 +20,18 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var move = _moveAction.ReadValue<Vector2>();
-        if (move.x != 0 && move.y != 0)
+        if (canMove)
         {
-            _rb.MovePosition(_rb.position + _lastMovement * speed);
-        }
-        else
-        {
-            _rb.MovePosition(_rb.position + move * speed);
-            _lastMovement = move;
+            var move = _moveAction.ReadValue<Vector2>();
+            if (move.x != 0 && move.y != 0)
+            {
+                _rb.MovePosition(_rb.position + _lastMovement * speed);
+            }
+            else
+            {
+                _rb.MovePosition(_rb.position + move * speed);
+                _lastMovement = move;
+            }
         }
     }
 }
