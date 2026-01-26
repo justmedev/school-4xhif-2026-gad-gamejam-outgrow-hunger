@@ -491,6 +491,7 @@ GameObject:
   - component: {fileID: 2027747708}
   - component: {fileID: 2027747707}
   - component: {fileID: 2027747709}
+  - component: {fileID: 2027747710}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -631,7 +632,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10bdf414fd178b746a9aebef26a06a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementScript
-  speed: 5
+  speed: 0.1
+  canMove: 1
 --- !u!50 &2027747709
 Rigidbody2D:
   serializedVersion: 5
@@ -659,6 +661,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &2027747710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027747704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade05545cb8be274194066095b8f433f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPlantingScript
+  plantStage1Prefab: {fileID: 1223741612335694624, guid: 891aff9e42982e34597dc82e057b75d2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
