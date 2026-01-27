@@ -1,9 +1,10 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Game/GameStyle.uss?fileID=7433441132597879392&amp;guid=7f1c193262b665e408be6631a0d10ca1&amp;type=3#GameStyle"/>
-    <ui:VisualElement name="DayVE" style="flex-grow: 1; display: flex;">
-        <ui:VisualElement name="HotbarVE" style="flex-grow: 1; flex-direction: column; align-items: center; justify-content: flex-end; flex-wrap: nowrap; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; align-content: auto;"/>
+    <Style src="project://database/Assets/UI/Game/GameStyle.uss?fileID=7433441132597879392&amp;guid=c8bf99de3f6ffeec9b8c03853056aa91&amp;type=3#GameStyle"/>
+    <ui:VisualElement name="DayVE" style="flex-grow: 1; justify-content: flex-end;">
+        <ui:VisualElement name="HotbarRoot" style="justify-content: flex-end; align-content: flex-end; align-items: center; margin-bottom: 10px;"/>
+        <ui:VisualElement name="HotbarItems" style="justify-content: flex-end; align-content: flex-end; align-items: center; margin-bottom: 10px;"/>
     </ui:VisualElement>
-    <ui:VisualElement name="NightVE" enabled="true" style="flex-grow: 1; display: none;">
+    <ui:VisualElement name="NightVE" style="flex-grow: 1; display: none;">
         <ui:Image style="background-color: rgb(43, 43, 43); flex-grow: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
     </ui:VisualElement>
     <ui:VisualElement name="PauseVE" style="flex-grow: 1; display: none; flex-direction: column; flex-wrap: nowrap; flex-shrink: 1; width: 75%; align-items: center; justify-content: center; align-self: center;">

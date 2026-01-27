@@ -1,5 +1,42 @@
-VisualElement {
+:root {
 }
+
+.inventory__slot {
+    background-color: rgb(241, 208, 167);
+    border-top-color: rgb(95, 80, 62);
+    border-bottom-color: rgb(95, 80, 62);
+    border-left-color: rgb(95, 80, 62);
+    border-right-color: rgb(95, 80, 62);
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    border-right-width: 3px;
+}
+
+.inventory__container-slot {
+    /* background-color: rgb(175, 175, 175); */
+}
+
+.inventory__container {
+    /*background-color: rgb(215, 215, 215);*/
+}
+
+.inventory__slot-item {
+    justify-content: flex-start;
+}
+
+.inventory__slot-item-qty {
+    margin-top: -4px;
+    font-size: 35px;
+    align-self: flex-end;
+    color: rgb(95, 80, 62);
+    -unity-font-definition: url("project://database/Assets/Font/m6x11plus.ttf?fileID=12800000&guid=f2e34ae4be0066f4fa4bdc7bfd7e9af1&type=3#m6x11plus");
+}
+
+#HotbarRoot > .inventory__container > Label {
+    display: none;
+}
+
 
 Button {
     -unity-font-definition: url("project://database/Assets/Font/m6x11plus.ttf?fileID=12800000&guid=f2e34ae4be0066f4fa4bdc7bfd7e9af1&type=3#m6x11plus");

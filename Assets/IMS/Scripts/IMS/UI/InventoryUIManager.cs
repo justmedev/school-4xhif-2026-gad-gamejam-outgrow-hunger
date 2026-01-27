@@ -148,8 +148,6 @@ namespace IMS.UI
                     backgroundImage = new StyleBackground(slot.GetItemStack().Item.GetSprite()),
                     width = _options.SlotSize,
                     height = _options.SlotSize,
-                    alignContent = Align.FlexEnd,
-                    justifyContent = Justify.FlexEnd,
                     position = Position.Absolute,
                     flexGrow = 0,
                     aspectRatio = 1
