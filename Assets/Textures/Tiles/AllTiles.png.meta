@@ -1441,6 +1441,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: AllTiles_60
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32ab2d041abab2c49bc4ed2f17c6b0b0
+      internalID: -918793510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -1514,6 +1536,7 @@ TextureImporter:
       AllTiles_58: -1435797509
       AllTiles_59: 974684883
       AllTiles_6: 85468720
+      AllTiles_60: -918793510
       AllTiles_7: -628749981
       AllTiles_8: -574876575
       AllTiles_9: 752685276
