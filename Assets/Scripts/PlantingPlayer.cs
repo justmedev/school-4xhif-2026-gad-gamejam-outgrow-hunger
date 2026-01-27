@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using IMS;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering.UI;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public class PlantingPlayer : MonoBehaviour
 {
@@ -53,7 +53,11 @@ public class PlantingPlayer : MonoBehaviour
         try
         {
             var cell = _fieldData[cellPos];
-            if (!cell.IsEmpty()) return;
+            if (!cell.IsEmpty())
+            {
+                HarvestAtPos(cellPos);
+                return;
+            }
 
             var slotIndex = _hotbarHolder.SelectedInventorySlotIndex;
             if (_hotbarHolder.Hotbar.Slots[slotIndex].IsEmpty) return;
@@ -73,6 +77,46 @@ public class PlantingPlayer : MonoBehaviour
         }
         catch (KeyNotFoundException)
         {
+        }
+    }
+
+    private void HarvestAtPos(Vector3Int cellPos)
+    {
+        var growthStage = _fieldData[cellPos].CurrentGrowthDay;
+        var harvested = _fieldData[cellPos].Harvest();
+        if (harvested == null) return;
+        Debug.Log($"Harvested: {harvested}");
+
+        cropTilemap.SetTile(cellPos, null);
+
+        var qty = 1;
+        // _hotbarHolder.Hotbar
+        if (growthStage <= 0) return; // No seeds at all on day 1
+        if (Random.value < harvested.Stages[growthStage].DoubleSeedChance)
+        {
+            qty = 2;
+        }
+
+        HotbarFillFirstAvailableSpace(new ItemStack(harvested.SeedItem, qty));
+    }
+
+    private void HotbarFillFirstAvailableSpace(ItemStack stack)
+    {
+        var inv = _hotbarHolder.Hotbar;
+        foreach (var slot in inv.Slots)
+        {
+            if (slot.IsEmpty || slot.ItemStack == null)
+            {
+                slot.PlaceItemStack(stack);
+                inv.PropagateChange(slot.Index);
+                return;
+            }
+
+            if (!slot.ItemStack.Equals(stack)) continue;
+
+            stack = slot.ItemStack.AddStack(stack);
+            inv.PropagateChange(slot.Index);
+            if (stack.IsEmpty) return;
         }
     }
 

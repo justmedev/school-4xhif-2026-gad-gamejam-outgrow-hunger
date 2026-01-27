@@ -6,4 +6,13 @@ public record CellData
     public int CurrentGrowthDay;
 
     public bool IsEmpty() => Planted == null;
+
+    public Plant Harvest()
+    {
+        if (IsEmpty()) return null;
+        CurrentGrowthDay = 0;
+        var harvested = Planted;
+        Planted = null;
+        return harvested;
+    }
 }
