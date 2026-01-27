@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     private InputAction _moveAction;
     private Rigidbody2D _rb;
+    private Vector2 _movePreviousFrame;
     private Vector2 _lastMovement;
     public bool canMove = true;
 
@@ -20,15 +21,24 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canMove)
         {
-            var move = _moveAction.ReadValue<Vector2>();
-            if (move.x != 0 && move.y != 0)
+            var curMove = _moveAction.ReadValue<Vector2>();
+            if (curMove.x != 0 && curMove.y != 0)
             {
-                _rb.MovePosition(_rb.position + _lastMovement * speed);
+                // here 2 keys are pressed at the same time
+                if (_lastMovement.x == 0)
+                {
+                    curMove.y = 0;
+                }
+                else
+                {
+                    curMove.x = 0;
+                }
+                _rb.MovePosition(_rb.position + curMove.normalized * speed);
             }
             else
             {
-                _rb.MovePosition(_rb.position + move * speed);
-                _lastMovement = move;
+                _rb.MovePosition(_rb.position + curMove.normalized * speed);
+                _lastMovement = curMove;
             }
         }
     }
