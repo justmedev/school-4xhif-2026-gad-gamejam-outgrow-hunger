@@ -45,11 +45,11 @@ TagManager:
   - name: Field
     uniqueID: 1640545923
     locked: 0
-  - name: Player
-    uniqueID: 1070619989
-    locked: 0
   - name: Crops
     uniqueID: 2375579643
+    locked: 0
+  - name: Player
+    uniqueID: 1070619989
     locked: 0
   m_RenderingLayers:
   - Default

@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using IMS;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.UI;
 using UnityEngine.Tilemaps;
 
 public class PlantingPlayer : MonoBehaviour
@@ -15,6 +17,20 @@ public class PlantingPlayer : MonoBehaviour
 
     private void Start()
     {
+        EventBus.Instance.OnDayChanged += day =>
+        {
+            cropTilemap.ClearAllTiles();
+            foreach (var (cellPos, cell) in _fieldData)
+            {
+                if (cell.IsEmpty()) continue;
+                cell.CurrentGrowthDay++;
+                var stage = cell.Planted?.Stages[Math.Min(cell.CurrentGrowthDay, cell.Planted.Stages.Count - 1)];
+                Debug.Log($"Stage: {stage}");
+                if (stage == null) continue; // TODO: ??? what
+                SetPlantingTileFromStage(cellPos, stage);
+            }
+        };
+
         cropTilemap.ClearAllTiles();
         _hotbarHolder = FindFirstObjectByType<InventoryHolder>();
 
@@ -22,6 +38,13 @@ public class PlantingPlayer : MonoBehaviour
         _interactAction.performed += _ => HandleCropFieldInteraction();
 
         AddMissingTilesToFieldData();
+    }
+
+    private void SetPlantingTileFromStage(Vector3Int cellPos, PlantStage stage)
+    {
+        var tile = ScriptableObject.CreateInstance<Tile>();
+        tile.sprite = stage.Sprite;
+        cropTilemap.SetTile(cellPos, tile);
     }
 
     private void HandleCropFieldInteraction()
@@ -44,17 +67,12 @@ public class PlantingPlayer : MonoBehaviour
                     _hotbarHolder.Hotbar.Slots[slotIndex].RemoveItemStack();
                 }
 
-                var tile = ScriptableObject.CreateInstance<Tile>();
-                tile.sprite = item.Plant.Stages[0].Sprite;
-                cropTilemap.SetTile(cellPos, tile);
-
+                SetPlantingTileFromStage(cellPos, item.Plant.Stages[0]);
                 _fieldData[cellPos].Planted = item.Plant;
             });
         }
-        catch (KeyNotFoundException e)
+        catch (KeyNotFoundException)
         {
-            Debug.LogWarning(e);
-            Debug.LogWarning($"Unable to find fieldData for position {cellPos}");
         }
     }
 
