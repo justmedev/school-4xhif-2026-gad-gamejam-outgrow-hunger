@@ -14,13 +14,11 @@ public class Plant : MonoBehaviour
         if (nextPlantStage != null)
         {
             yield return StartCoroutine(WaitAndGrow(3.3f));
-            print("Done " + Time.time);
             Instantiate(nextPlantStage, transform.position, transform.rotation);
             Destroy(gameObject);
         }
         else
         {
-            Debug.Log("PLANT FINISHED!!!");
             harvestable = true;
         }
     }
