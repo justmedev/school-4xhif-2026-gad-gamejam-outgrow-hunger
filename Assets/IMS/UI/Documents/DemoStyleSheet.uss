@@ -1,0 +1,27 @@
+:root {
+}
+
+.inventory__slot {
+    background-color: rgb(53, 53, 53);
+}
+
+
+.inventory__container-slot {
+    background-color: rgb(175, 175, 175);
+}
+
+
+.inventory__container {
+    background-color: rgb(215, 215, 215);
+}
+
+.inventory__slot-item-qty {
+    font-size: 20px;
+    align-self: flex-end;
+    color: white;
+}
+
+/* Example: Hide the label of an inventory */
+#hotbarRoot > .inventory__container > Label {
+    display: none;
+}

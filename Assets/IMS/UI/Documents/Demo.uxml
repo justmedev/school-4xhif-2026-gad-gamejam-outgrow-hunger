@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
+         editor-extension-mode="False">
+    <Style src="project://database/Assets/IMS/UI/Documents/DemoStyleSheet.uss?fileID=7433441132597879392&amp;guid=bfbd555bf841ef7d8b0883650711a710&amp;type=3#DemoStyleSheet"/>
+    <ui:VisualElement name="inventoryRoot" style="flex-grow: 1; justify-content: center; align-items: center;"/>
+    <ui:VisualElement name="hotbarRoot" style="flex-grow: 0; justify-content: center; align-items: center;"/>
+    <ui:VisualElement name="itemRoot" picking-mode="Ignore" style="flex-grow: 0;"/>
+</ui:UXML>
