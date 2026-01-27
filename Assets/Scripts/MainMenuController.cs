@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.SceneManagement; // <- needed for changing scenes
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
