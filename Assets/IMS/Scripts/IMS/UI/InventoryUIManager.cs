@@ -49,9 +49,7 @@ namespace IMS.UI
             {
                 style =
                 {
-                    marginLeft = _options.Spacing * 2,
-                    marginRight = _options.Spacing * 2,
-                    width = (_options.SlotSize + _options.Spacing) * _inventory.Cols + _options.Spacing * 3,
+                    width = _options.Spacing * (_inventory.Cols + 1) + _options.SlotSize * _inventory.Cols,
                     flexGrow = 0
                 }
             };
@@ -71,7 +69,6 @@ namespace IMS.UI
                     flexGrow = 0
                 }
             };
-            slotContainerVe.style.MarginAll(_options.Spacing);
             slotContainerVe.style.PaddingAll(_options.Spacing / 2);
             slotContainerVe.AddToClassList(InventoryUIClasses.SlotContainer);
             windowVe.Add(label);

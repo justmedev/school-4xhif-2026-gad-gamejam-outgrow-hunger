@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UIElements;
 
-namespace Game
+namespace UI.Game
 {
     public record GameControls(
         VisualElement NightVe,
