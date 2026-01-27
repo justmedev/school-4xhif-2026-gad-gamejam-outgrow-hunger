@@ -6,4 +6,8 @@
     <ui:VisualElement name="NightVE" enabled="true" style="flex-grow: 1; display: none;">
         <ui:Image style="background-color: rgb(43, 43, 43); flex-grow: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
     </ui:VisualElement>
+    <ui:VisualElement name="PauseVE" style="flex-grow: 1; display: none; flex-direction: column; flex-wrap: nowrap; flex-shrink: 1; width: 75%; align-items: center; justify-content: center; align-self: center;">
+        <ui:Button text="Return to Game" name="ReturnToGameButton"/>
+        <ui:Button text="Exit Game" name="ExitGameButton"/>
+    </ui:VisualElement>
 </ui:UXML>
