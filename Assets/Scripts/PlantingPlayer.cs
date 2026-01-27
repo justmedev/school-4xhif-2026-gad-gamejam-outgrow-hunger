@@ -23,7 +23,7 @@ public class PlantingPlayer : MonoBehaviour
             foreach (var (cellPos, cell) in _fieldData)
             {
                 if (cell.IsEmpty()) continue;
-                cell.CurrentGrowthDay++;
+                cell.CurrentGrowthDay = Math.Min(cell.CurrentGrowthDay + 1, cell.Planted.Stages.Count - 1);
                 var stage = cell.Planted?.Stages[Math.Min(cell.CurrentGrowthDay, cell.Planted.Stages.Count - 1)];
                 Debug.Log($"Stage: {stage}");
                 if (stage == null) continue; // TODO: ??? what
