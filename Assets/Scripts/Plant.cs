@@ -1,32 +1,14 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
-public class Plant : MonoBehaviour
+[CreateAssetMenu(fileName = "Plant", menuName = "HungryBunnies/Plant", order = 0)]
+public class Plant : ScriptableObject
 {
-    [SerializeField] private GameObject nextPlantStage;
-    public bool harvestable;
+    [SerializeField] private string label;
+    [SerializeField] private List<PlantStage> stages;
+    [SerializeField] private Sprite seedSprite;
 
-    private IEnumerator _coroutine;
-
-    private IEnumerator Start()
-    {
-        if (nextPlantStage != null)
-        {
-            yield return StartCoroutine(WaitAndGrow(3.3f));
-            print("Done " + Time.time);
-            Instantiate(nextPlantStage, transform.position, transform.rotation);
-            Destroy(gameObject);
-        }
-        else
-        {
-            Debug.Log("PLANT FINISHED!!!");
-            harvestable = true;
-        }
-    }
-
-    private IEnumerator WaitAndGrow(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-    }
+    public string Label => label;
+    public List<PlantStage> Stages => stages;
+    public Sprite SeedSprite => seedSprite;
 }
