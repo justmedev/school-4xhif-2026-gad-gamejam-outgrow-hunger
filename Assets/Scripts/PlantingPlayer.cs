@@ -8,7 +8,6 @@ using Random = UnityEngine.Random;
 
 public class PlantingPlayer : MonoBehaviour
 {
-    [SerializeField] private BoundsInt scanRange;
     [SerializeField] private Tilemap cropTilemap;
     [SerializeField] private Tilemap fieldTilemap;
     private InputAction _interactAction;
