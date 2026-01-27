@@ -8,20 +8,20 @@ using UnityEngine.UIElements;
 
 public class InventoryHolder : MonoBehaviour
 {
-    // TODO: REMOVE
+    private const int InventoryCols = 4;
+
     [SerializeField] private SeedItem[] startItems;
     [SerializeField] private UIDocument doc;
-    private Inventory _hotbar;
     private readonly OnDropHandler _onDropHandler = new();
-    private int _selectedInventorySlotIndex = 0;
-    private const int InventoryCols = 4;
-    private UQueryBuilder<VisualElement> _renderedSlots;
     private StyleColor _initialBgColor;
+    private UQueryBuilder<VisualElement> _renderedSlots;
+    public int SelectedInventorySlotIndex { get; private set; }
+    public Inventory Hotbar { get; private set; }
 
     private void Start()
     {
         var inventoryRoot = doc.rootVisualElement.Q("HotbarRoot");
-        _hotbar = new Inventory(
+        Hotbar = new Inventory(
             "Hotbar",
             InventoryCols,
             1,
@@ -32,14 +32,14 @@ public class InventoryHolder : MonoBehaviour
                 ItemRoot = doc.rootVisualElement.Q("HotbarItems"),
             }
         );
-        _hotbar.SetUIManagerItemVisualElementModifier((ref VisualElement ve) =>
-            CreateItemVisualElementModifier(_hotbar, doc.rootVisualElement, ref ve));
+        Hotbar.SetUIManagerItemVisualElementModifier((ref VisualElement ve) =>
+            CreateItemVisualElementModifier(Hotbar, doc.rootVisualElement, ref ve));
 
 
         if (startItems.Length > InventoryCols) throw new ArgumentException($"startItems maxlength = {InventoryCols}");
         for (var i = 0; i < startItems.Length; i++)
         {
-            _hotbar.PlaceItemStack(i, new ItemStack(startItems[i], 2));
+            Hotbar.PlaceItemStack(i, new ItemStack(startItems[i], 2));
         }
 
         _renderedSlots = doc.rootVisualElement.Query(className: InventoryUIClasses.Slot);
@@ -49,35 +49,35 @@ public class InventoryHolder : MonoBehaviour
         InputSystem.actions.FindAction("Previous").performed += _ =>
         {
             ResetSelectedSlotMarking();
-            if (_selectedInventorySlotIndex == 0) _selectedInventorySlotIndex = InventoryCols - 1;
-            else _selectedInventorySlotIndex--;
+            if (SelectedInventorySlotIndex == 0) SelectedInventorySlotIndex = InventoryCols - 1;
+            else SelectedInventorySlotIndex--;
             MarkSelectedSlot();
         };
 
         InputSystem.actions.FindAction("Next").performed += _ =>
         {
             ResetSelectedSlotMarking();
-            if (_selectedInventorySlotIndex == InventoryCols - 1) _selectedInventorySlotIndex = 0;
-            else _selectedInventorySlotIndex++;
+            if (SelectedInventorySlotIndex == InventoryCols - 1) SelectedInventorySlotIndex = 0;
+            else SelectedInventorySlotIndex++;
             MarkSelectedSlot();
         };
 
         InputSystem.actions.FindAction("SelectHotbarSlot").performed += ctx =>
         {
             ResetSelectedSlotMarking();
-            _selectedInventorySlotIndex = (int)ctx.ReadValue<float>() - 1;
+            SelectedInventorySlotIndex = (int)ctx.ReadValue<float>() - 1;
             MarkSelectedSlot();
         };
     }
 
     private void ResetSelectedSlotMarking()
     {
-        _renderedSlots.AtIndex(_selectedInventorySlotIndex).style.backgroundColor = _initialBgColor;
+        _renderedSlots.AtIndex(SelectedInventorySlotIndex).style.backgroundColor = _initialBgColor;
     }
 
     private void MarkSelectedSlot()
     {
-        _renderedSlots.AtIndex(_selectedInventorySlotIndex).style.backgroundColor =
+        _renderedSlots.AtIndex(SelectedInventorySlotIndex).style.backgroundColor =
             new StyleColor(new Color(95, 80, 62));
     }
 
