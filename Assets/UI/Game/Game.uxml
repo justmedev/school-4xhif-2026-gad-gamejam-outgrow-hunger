@@ -4,5 +4,7 @@
         <ui:VisualElement name="HotbarRoot" style="justify-content: flex-end; align-content: flex-end; align-items: center; margin-bottom: 10px;"/>
         <ui:VisualElement name="HotbarItems" style="justify-content: flex-end; align-content: flex-end; align-items: center; margin-bottom: 10px;"/>
     </ui:VisualElement>
-    <ui:VisualElement name="NightVE" style="flex-grow: 1; display: none;"/>
+    <ui:VisualElement name="NightVE" style="flex-grow: 1; display: none;">
+        <ui:Image style="background-color: rgb(43, 43, 43); flex-grow: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
+    </ui:VisualElement>
 </ui:UXML>
