@@ -20,7 +20,7 @@ public class House : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.name == "House")
+        if (col.gameObject.CompareTag("House"))
         {
             _isInHouseRange = true;
         }
@@ -28,7 +28,7 @@ public class House : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D col)
     {
-        if (col.gameObject.name == "House")
+        if (col.gameObject.CompareTag("House"))
         {
             _isInHouseRange = false;
         }
