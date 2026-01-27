@@ -28,3 +28,18 @@ Button {
     border-bottom-color: rgb(255, 140, 140);
     min-width: 75%;
 }
+
+Image {
+    height: 80%;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    align-items: stretch;
+    aspect-ratio: 1;
+    flex-grow: 0;
+}

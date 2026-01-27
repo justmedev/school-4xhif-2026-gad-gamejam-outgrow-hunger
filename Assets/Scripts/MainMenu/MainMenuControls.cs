@@ -4,9 +4,10 @@ namespace MainMenu
 {
     public record MainMenuControls(
         Button StartButton,
-        Button SettingsButton,
+        Button CreditsButton,
         Button ExitButton,
+        Button ReturnButton,
         Label MainMenuLabel,
         VisualElement MainMenuVe,
-        VisualElement SettingsVe);
+        VisualElement CreditsVe);
 }
