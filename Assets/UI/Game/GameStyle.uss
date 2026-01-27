@@ -14,11 +14,9 @@
 }
 
 .inventory__container-slot {
-    /* background-color: rgb(175, 175, 175); */
 }
 
 .inventory__container {
-    /*background-color: rgb(215, 215, 215);*/
 }
 
 .inventory__slot-item {
@@ -35,33 +33,4 @@
 
 #HotbarRoot > .inventory__container > Label {
     display: none;
-}
-
-
-Button {
-    -unity-font-definition: url("project://database/Assets/Font/m6x11plus.ttf?fileID=12800000&guid=f2e34ae4be0066f4fa4bdc7bfd7e9af1&type=3#m6x11plus");
-    font-size: 50px;
-    background-color: rgb(251, 191, 191);
-    background-size: 100% 100%;
-    padding-top: 0%;
-    margin-top: 1%;
-    margin-right: 1%;
-    margin-bottom: 1%;
-    margin-left: 1%;
-    padding-right: 0%;
-    padding-bottom: 0%;
-    padding-left: 0%;
-    border-top-width: 10px;
-    border-right-width: 10px;
-    border-bottom-width: 10px;
-    border-left-width: 10px;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-    border-bottom-left-radius: 50px;
-    border-left-color: rgb(255, 140, 140);
-    border-right-color: rgb(255, 140, 140);
-    border-top-color: rgb(255, 140, 140);
-    border-bottom-color: rgb(255, 140, 140);
-    min-width: 75%;
 }

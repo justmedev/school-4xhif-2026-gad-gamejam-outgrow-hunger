@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Game;
+using UI.Game;
 using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
@@ -14,7 +14,7 @@ public class GameStateManager : MonoBehaviour
     
     public void NextDay()
     {
-        _gameUIController.NightBegin();
+        _gameUIController.SwitchToNightUI();
 
         StartCoroutine(NightScene());
         
@@ -25,6 +25,6 @@ public class GameStateManager : MonoBehaviour
     IEnumerator NightScene()
     {
         yield return new WaitForSeconds(1.5f);
-        _gameUIController.NightOver();
+        _gameUIController.SwitchToDayUI();
     }
 }

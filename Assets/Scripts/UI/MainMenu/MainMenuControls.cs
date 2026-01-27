@@ -1,6 +1,6 @@
 using UnityEngine.UIElements;
 
-namespace MainMenu
+namespace UI.MainMenu
 {
     public record MainMenuControls(
         Button StartButton,

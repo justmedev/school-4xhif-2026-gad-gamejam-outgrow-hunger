@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace MainMenu
+namespace UI.MainMenu
 {
     public class MainMenuCameraMover : MonoBehaviour
     {

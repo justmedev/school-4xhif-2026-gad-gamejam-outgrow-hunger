@@ -1,14 +1,18 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Game/GameStyle.uss?fileID=7433441132597879392&amp;guid=c8bf99de3f6ffeec9b8c03853056aa91&amp;type=3#GameStyle"/>
-    <ui:VisualElement name="DayVE" style="flex-grow: 1; justify-content: flex-end;">
+    <Style src="project://database/Assets/UI/Game/GameStyle.uss?fileID=7433441132597879392&amp;guid=c8bf99de3f6ffeec9b8c03853056aa91&amp;type=3"/>
+    <Style src="project://database/Assets/UI/MainStyle.uss?fileID=7433441132597879392&amp;guid=002115899abc1014d8549fb254dca04e&amp;type=3#MainStyle"/>
+    <ui:VisualElement name="DayVE" style="flex-grow: 1; justify-content: flex-end; display: flex;">
         <ui:VisualElement name="HotbarRoot" style="justify-content: flex-end; align-content: flex-end; align-items: center; margin-bottom: 10px;"/>
         <ui:VisualElement name="HotbarItems" style="justify-content: flex-end; align-content: flex-end; align-items: center; margin-bottom: 10px;"/>
     </ui:VisualElement>
     <ui:VisualElement name="NightVE" style="flex-grow: 1; display: none;">
         <ui:Image style="background-color: rgb(43, 43, 43); flex-grow: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
     </ui:VisualElement>
-    <ui:VisualElement name="PauseVE" style="flex-grow: 1; display: none; flex-direction: column; flex-wrap: nowrap; flex-shrink: 1; width: 75%; align-items: center; justify-content: center; align-self: center;">
-        <ui:Button text="Return to Game" name="ReturnToGameButton"/>
-        <ui:Button text="Exit Game" name="ExitGameButton"/>
+    <ui:VisualElement name="PauseVE" style="flex-grow: 1; flex-direction: column; flex-wrap: nowrap; flex-shrink: 1; align-items: center; justify-content: center; align-self: center; display: none; background-color: rgba(0, 0, 0, 0.5); padding-bottom: 20px; width: 100%;">
+        <ui:VisualElement style="flex-grow: 0; width: 500px;">
+            <ui:Image style="background-image: url(&quot;project://database/Assets/Textures/Titlecard.png?fileID=2800000&amp;guid=a145282abd56c7b49b2758596197fe02&amp;type=3#Titlecard&quot;); background-size: cover; -unity-background-scale-mode: scale-to-fit; width: 500px; height: 123px; margin-bottom: 20px;"/>
+            <ui:Button text="Resume" name="ReturnToGameButton" class="red" style="width: 100%;"/>
+            <ui:Button text="Exit Game" name="ExitGameButton" style="width: 100%;"/>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
