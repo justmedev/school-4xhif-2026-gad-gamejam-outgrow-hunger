@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Game/GameStyle.uss?fileID=7433441132597879392&amp;guid=c8bf99de3f6ffeec9b8c03853056aa91&amp;type=3#GameStyle"/>
+    <ui:VisualElement name="DayVE" style="flex-grow: 1; justify-content: flex-end;">
+        <ui:VisualElement name="HotbarRoot" style="justify-content: flex-end; align-content: flex-end; align-items: center; margin-bottom: 10px;"/>
+        <ui:VisualElement name="HotbarItems" style="justify-content: flex-end; align-content: flex-end; align-items: center; margin-bottom: 10px;"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="NightVE" style="flex-grow: 1; display: none;"/>
+</ui:UXML>

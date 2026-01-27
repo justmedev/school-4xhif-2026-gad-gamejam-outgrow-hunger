@@ -1,7 +1,8 @@
 using IMS;
 using UnityEngine;
 
-public class SeedItem : IItem
+[CreateAssetMenu(fileName = "SeedItem", menuName = "HungryBunnies/Seed Item")]
+public class SeedItem : ScriptableObject, IItem
 {
     public Plant Plant;
 
