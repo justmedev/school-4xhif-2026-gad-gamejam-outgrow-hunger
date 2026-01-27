@@ -2,14 +2,14 @@ using System;
 using UnityEngine;
 using System.Collections;
 
-public class PlantScript : MonoBehaviour
+public class Plant : MonoBehaviour
 {
     [SerializeField] private GameObject nextPlantStage;
-    public bool harvestable = false;
+    public bool harvestable;
 
-    private IEnumerator coroutine;
+    private IEnumerator _coroutine;
 
-    IEnumerator Start()
+    private IEnumerator Start()
     {
         if (nextPlantStage != null)
         {
@@ -25,7 +25,7 @@ public class PlantScript : MonoBehaviour
         }
     }
 
-    IEnumerator WaitAndGrow(float waitTime)
+    private IEnumerator WaitAndGrow(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
     }
