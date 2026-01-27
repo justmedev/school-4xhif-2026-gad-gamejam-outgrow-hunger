@@ -28,21 +28,17 @@ public class PlayerPlantingScript : MonoBehaviour
 
         if (_interactAction.WasPressedThisFrame() && _nearOtherPlant)
         {
-            Debug.Log("Try Harvest");
             if (!_currentPlant || !_currentPlant.GetComponent<Plant>().harvestable) return;
-            Debug.Log("Harvest");
             StartCoroutine(Harvest());
         }
     }
 
     IEnumerator Harvest()
     {
-        Debug.Log("Start Harvest");
         GetComponent<PlayerMovement>().canMove = false;
         yield return StartCoroutine(WaitAndHarvest(1.0f));
         Destroy(_currentPlant);
         GetComponent<PlayerMovement>().canMove = true;
-        Debug.Log("Finish Harvest");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
