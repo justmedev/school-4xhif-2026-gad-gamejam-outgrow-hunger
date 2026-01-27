@@ -4504,7 +4504,7 @@ GameObject:
   - component: {fileID: 1654070401}
   m_Layer: 0
   m_Name: House
-  m_TagString: Untagged
+  m_TagString: House
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4867,10 +4867,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2027747704}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ade05545cb8be274194066095b8f433f, type: 3}
+  m_Script: {fileID: 11500000, guid: 49b2810c0d8ac7e41af6beddd922552e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerPlantingScript
-  plantStage1Prefab: {fileID: 5947302468535731843, guid: 5cac3a49916c124459263d3da11b91e2, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::House
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
