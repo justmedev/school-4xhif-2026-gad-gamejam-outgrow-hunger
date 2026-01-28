@@ -31,3 +31,7 @@ Button:hover {
 Button.red {
     background-image: url("project://database/Assets/Textures/ButtonRed.png?fileID=6892458850344700614&guid=4ab6aa098192a24c293edbc715dc2214&type=3#ButtonRed_0");
 }
+
+Label {
+    -unity-font-definition: url("project://database/Assets/Font/m6x11plus.ttf?fileID=12800000&guid=f2e34ae4be0066f4fa4bdc7bfd7e9af1&type=3#m6x11plus");
+}

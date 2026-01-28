@@ -34,3 +34,7 @@
 #HotbarRoot > .inventory__container > Label {
     display: none;
 }
+
+.health-saturation-label {
+    font-size: 42px;
+}

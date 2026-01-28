@@ -13,9 +13,11 @@ public class PlantingPlayer : MonoBehaviour
     private InputAction _interactAction;
     private readonly Dictionary<Vector3Int, CellData> _fieldData = new();
     private InventoryHolder _hotbarHolder;
+    private GameStateManager _gsm;
 
     private void Start()
     {
+        _gsm = FindFirstObjectByType<GameStateManager>();
         EventBus.Instance.OnDayChanged += day =>
         {
             cropTilemap.ClearAllTiles();
@@ -81,21 +83,21 @@ public class PlantingPlayer : MonoBehaviour
 
     private void HarvestAtPos(Vector3Int cellPos)
     {
-        var growthStage = _fieldData[cellPos].CurrentGrowthDay;
+        var growthDay = _fieldData[cellPos].CurrentGrowthDay;
         var harvested = _fieldData[cellPos].Harvest();
         if (harvested == null) return;
-        Debug.Log($"Harvested: {harvested}");
+        var stage = harvested.Stages[growthDay];
 
         cropTilemap.SetTile(cellPos, null);
 
         var qty = 1;
-        // _hotbarHolder.Hotbar
-        if (growthStage <= 0) return; // No seeds at all on day 1
-        if (Random.value < harvested.Stages[growthStage].DoubleSeedChance)
+        if (growthDay <= 0) return; // No seeds at all on day 1
+        if (Random.value < stage.DoubleSeedChance)
         {
             qty = 2;
         }
 
+        _gsm.AddSaturationLevel(stage.Saturation);
         HotbarFillFirstAvailableSpace(new ItemStack(harvested.SeedItem, qty));
     }
 
