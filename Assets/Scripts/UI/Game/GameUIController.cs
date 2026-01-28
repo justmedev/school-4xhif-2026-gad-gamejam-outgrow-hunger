@@ -83,7 +83,7 @@ namespace UI.Game
 
         private void Update()
         {
-            if (!_isCurrentlyDay) return;
+            if (_isCurrentlyDay) return;
 
             _elapsedTimeNightScene += Time.deltaTime;
             var t = Mathf.Clamp01(_elapsedTimeNightScene / GameStateManager.NightSceneDurationSeconds);
