@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
 {
-    public int RequiredSaturationLevel = 10;
+    public int requiredSaturationLevel = 10;
     public const int MaxHealthLevel = 10;
     public int CurrentSaturationLevel { get; private set; }
     public int CurrentHealthLevel { get; private set; } = MaxHealthLevel;
@@ -16,7 +16,7 @@ public class GameStateManager : MonoBehaviour
     {
         _gui = FindFirstObjectByType<GameUIController>();
         _gui.UpdateHealthLevel(CurrentHealthLevel, MaxHealthLevel);
-        _gui.UpdateSaturationLevel(CurrentSaturationLevel, RequiredSaturationLevel);
+        _gui.UpdateSaturationLevel(CurrentSaturationLevel, requiredSaturationLevel);
 
         EventBus.Instance.OnDayChanged += ConsumeAndIncreaseSaturation;
     }
@@ -24,17 +24,17 @@ public class GameStateManager : MonoBehaviour
     public void AddSaturationLevel(int level)
     {
         CurrentSaturationLevel += level;
-        _gui.UpdateSaturationLevel(CurrentSaturationLevel, RequiredSaturationLevel);
+        _gui.UpdateSaturationLevel(CurrentSaturationLevel, requiredSaturationLevel);
     }
 
     private void ConsumeAndIncreaseSaturation(int day)
     {
-        var diff = CurrentSaturationLevel - RequiredSaturationLevel;
+        var diff = CurrentSaturationLevel - requiredSaturationLevel;
         CurrentSaturationLevel = Math.Max(0, diff);
         CurrentHealthLevel = diff >= 0
             ? Math.Clamp(CurrentHealthLevel + 1, 0, MaxHealthLevel)
             : Math.Clamp(CurrentHealthLevel - 1, 0, MaxHealthLevel);
-        _gui.UpdateSaturationLevel(CurrentSaturationLevel, RequiredSaturationLevel);
+        _gui.UpdateSaturationLevel(CurrentSaturationLevel, requiredSaturationLevel);
         _gui.UpdateHealthLevel(CurrentHealthLevel, MaxHealthLevel);
 
         if (CurrentHealthLevel <= 0)
@@ -44,7 +44,7 @@ public class GameStateManager : MonoBehaviour
 
         if (day % 2 == 0)
         {
-            RequiredSaturationLevel += 2;
+            requiredSaturationLevel += 2;
         }
     }
 
