@@ -3,12 +3,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-namespace MainMenu
+namespace UI.MainMenu
 {
     public class MainMenuUIController : MonoBehaviour
     {
-        private UIDocument _uiDoc;
         private MainMenuControls _controls;
+        private UIDocument _uiDoc;
 
         private void Awake()
         {
@@ -19,7 +19,6 @@ namespace MainMenu
                 root.Q<Button>("CreditsButton"),
                 root.Q<Button>("ExitButton"),
                 root.Q<Button>("ReturnButton"),
-                root.Q<Label>("MainMenuText"),
                 root.Q<VisualElement>("MainMenuVE"),
                 root.Q<VisualElement>("CreditsVE")
             );
@@ -39,21 +38,21 @@ namespace MainMenu
         private void OnCreditsButtonClicked()
         {
             _controls.MainMenuVe.style.display = DisplayStyle.None;
-            _controls.CreditsVe.style.display  = DisplayStyle.Flex;
+            _controls.CreditsVe.style.display = DisplayStyle.Flex;
         }
 
-        private void OnExitButtonClicked()
+        private static void OnExitButtonClicked()
         {
             Application.Quit();
 #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
 #endif
         }
-        
+
         private void OnReturnButtonClicked()
         {
             _controls.MainMenuVe.style.display = DisplayStyle.Flex;
-            _controls.CreditsVe.style.display  = DisplayStyle.None;
+            _controls.CreditsVe.style.display = DisplayStyle.None;
         }
     }
 }

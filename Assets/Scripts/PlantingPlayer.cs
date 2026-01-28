@@ -1,31 +1,38 @@
 using System;
 using System.Collections.Generic;
 using IMS;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(ItemCollectAnimationPlayer))]
 public class PlantingPlayer : MonoBehaviour
 {
     [SerializeField] private Tilemap cropTilemap;
     [SerializeField] private Tilemap fieldTilemap;
-    private InputAction _interactAction;
     private readonly Dictionary<Vector3Int, CellData> _fieldData = new();
+    private ItemCollectAnimationPlayer _collectItemAnimPlayer;
+    private GameStateManager _gsm;
     private InventoryHolder _hotbarHolder;
+    private InputAction _interactAction;
 
     private void Start()
     {
-        EventBus.Instance.OnDayChanged += day =>
+        _collectItemAnimPlayer = GetComponent<ItemCollectAnimationPlayer>();
+        _gsm = FindFirstObjectByType<GameStateManager>();
+        EventBus.Instance.OnDayChanged += _ =>
         {
             cropTilemap.ClearAllTiles();
             foreach (var (cellPos, cell) in _fieldData)
             {
                 if (cell.IsEmpty()) continue;
-                cell.CurrentGrowthDay = Math.Min(cell.CurrentGrowthDay + 1, cell.Planted.Stages.Count - 1);
+                cell.CurrentGrowthDay = Math.Min(cell.CurrentGrowthDay + 1, cell.Planted!.Stages.Count - 1);
+
                 var stage = cell.Planted?.Stages[Math.Min(cell.CurrentGrowthDay, cell.Planted.Stages.Count - 1)];
-                Debug.Log($"Stage: {stage}");
-                if (stage == null) continue; // TODO: ??? what
+                if (!stage) continue;
+
                 SetPlantingTileFromStage(cellPos, stage);
             }
         };
@@ -39,7 +46,7 @@ public class PlantingPlayer : MonoBehaviour
         AddMissingTilesToFieldData();
     }
 
-    private void SetPlantingTileFromStage(Vector3Int cellPos, PlantStage stage)
+    private void SetPlantingTileFromStage(Vector3Int cellPos, [NotNull] PlantStage stage)
     {
         var tile = ScriptableObject.CreateInstance<Tile>();
         tile.sprite = stage.Sprite;
@@ -65,13 +72,10 @@ public class PlantingPlayer : MonoBehaviour
                 var item = stack.TakeItem() as SeedItem;
                 if (item == null) return;
 
-                if (stack.IsEmpty)
-                {
-                    _hotbarHolder.Hotbar.Slots[slotIndex].RemoveItemStack();
-                }
+                if (stack.IsEmpty) _hotbarHolder.Hotbar.Slots[slotIndex].RemoveItemStack();
 
-                SetPlantingTileFromStage(cellPos, item.Plant.Stages[0]);
-                _fieldData[cellPos].Planted = item.Plant;
+                SetPlantingTileFromStage(cellPos, item.plant.Stages[0]);
+                _fieldData[cellPos].Planted = item.plant;
             });
         }
         catch (KeyNotFoundException)
@@ -81,22 +85,31 @@ public class PlantingPlayer : MonoBehaviour
 
     private void HarvestAtPos(Vector3Int cellPos)
     {
-        var growthStage = _fieldData[cellPos].CurrentGrowthDay;
+        var growthDay = _fieldData[cellPos].CurrentGrowthDay;
         var harvested = _fieldData[cellPos].Harvest();
         if (harvested == null) return;
-        Debug.Log($"Harvested: {harvested}");
+        var stage = harvested.Stages[growthDay];
 
         cropTilemap.SetTile(cellPos, null);
 
-        var qty = 1;
-        // _hotbarHolder.Hotbar
-        if (growthStage <= 0) return; // No seeds at all on day 1
-        if (Random.value < harvested.Stages[growthStage].DoubleSeedChance)
-        {
-            qty = 2;
-        }
+        var seedQty = 1;
+        if (growthDay <= 0) return; // No seeds at all on day 1
+        if (Random.value < stage.DoubleSeedChance) seedQty = 2;
 
-        HotbarFillFirstAvailableSpace(new ItemStack(harvested.SeedItem, qty));
+        _gsm.AddSaturationLevel(stage.Saturation);
+        HotbarFillFirstAvailableSpace(new ItemStack(harvested.SeedItem, seedQty));
+
+        _collectItemAnimPlayer.AddToQueue(
+            seedQty,
+            new Vector2(transform.position.x, transform.position.y + .5f),
+            harvested.SeedSprite
+        );
+
+        _collectItemAnimPlayer.AddToQueue(
+            stage.Saturation,
+            new Vector2(transform.position.x, transform.position.y + .5f),
+            harvested.ResourceSprite
+        );
     }
 
     private void HotbarFillFirstAvailableSpace(ItemStack stack)
@@ -125,17 +138,12 @@ public class PlantingPlayer : MonoBehaviour
         var allTiles = fieldTilemap.GetTilesBlock(bounds);
 
         for (var x = 0; x < bounds.size.x; x++)
+        for (var y = 0; y < bounds.size.y; y++)
         {
-            for (var y = 0; y < bounds.size.y; y++)
-            {
-                var tile = allTiles[x + y * bounds.size.x];
-                var cellPos = new Vector3Int(x + bounds.xMin, y + bounds.yMin, 0);
+            var tile = allTiles[x + y * bounds.size.x];
+            var cellPos = new Vector3Int(x + bounds.xMin, y + bounds.yMin, 0);
 
-                if (tile != null && !_fieldData.ContainsKey(cellPos))
-                {
-                    _fieldData.Add(cellPos, new CellData());
-                }
-            }
+            if (tile != null && !_fieldData.ContainsKey(cellPos)) _fieldData.Add(cellPos, new CellData());
         }
     }
 }

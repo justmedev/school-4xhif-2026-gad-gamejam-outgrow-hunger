@@ -29,7 +29,7 @@ public class InventoryHolder : MonoBehaviour
             {
                 SlotSize = 90,
                 Spacing = 4,
-                ItemRoot = doc.rootVisualElement.Q("HotbarItems"),
+                ItemRoot = doc.rootVisualElement.Q("HotbarItems")
             }
         );
         Hotbar.SetUIManagerItemVisualElementModifier((ref VisualElement ve) =>
@@ -37,10 +37,7 @@ public class InventoryHolder : MonoBehaviour
 
 
         if (startItems.Length > InventoryCols) throw new ArgumentException($"startItems maxlength = {InventoryCols}");
-        for (var i = 0; i < startItems.Length; i++)
-        {
-            Hotbar.PlaceItemStack(i, new ItemStack(startItems[i], 2));
-        }
+        for (var i = 0; i < startItems.Length; i++) Hotbar.PlaceItemStack(i, new ItemStack(startItems[i], 2));
 
         _renderedSlots = doc.rootVisualElement.Query(className: InventoryUIClasses.Slot);
         _initialBgColor = _renderedSlots.First().style.backgroundColor;

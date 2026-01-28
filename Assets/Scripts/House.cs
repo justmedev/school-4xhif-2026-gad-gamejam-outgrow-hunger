@@ -1,11 +1,13 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class House : MonoBehaviour
 {
-    private InputAction _interactAction;
     private GameStateManager _gsm;
+    private InputAction _interactAction;
     private bool _isInHouseRange;
+    private bool _isSleepEnabled = true;
 
     private void OnEnable()
     {
@@ -14,23 +16,21 @@ public class House : MonoBehaviour
         _interactAction.performed += _ =>
         {
             if (!_isInHouseRange) return;
-            _gsm.NextDay();
+            if (!_isSleepEnabled) return;
+            StartCoroutine(_gsm.NextDay());
         };
+
+        EventBus.Instance.OnNightStarted += () => _isSleepEnabled = false;
+        EventBus.Instance.OnDayChanged += _ => _isSleepEnabled = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter2D([NotNull] Collision2D col)
     {
-        if (col.gameObject.CompareTag("House"))
-        {
-            _isInHouseRange = true;
-        }
+        if (col.gameObject.CompareTag("House")) _isInHouseRange = true;
     }
 
-    private void OnCollisionExit2D(Collision2D col)
+    private void OnCollisionExit2D([NotNull] Collision2D col)
     {
-        if (col.gameObject.CompareTag("House"))
-        {
-            _isInHouseRange = false;
-        }
+        if (col.gameObject.CompareTag("House")) _isInHouseRange = false;
     }
 }

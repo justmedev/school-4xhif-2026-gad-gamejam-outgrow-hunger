@@ -17,5 +17,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c1630cd1aa86cc5abb463d63a7e0968f, type: 2}
   - {fileID: 11400000, guid: 9fe7beba2f0dd08778944c5726174e13, type: 2}
   - {fileID: 11400000, guid: e4f0cf8f50dee60028daff73cdb18db6, type: 2}
+  resourceSprite: {fileID: 21300000, guid: 4b5fae0116a64244289433492bf95e17, type: 3}
   seedSprite: {fileID: 21300000, guid: 881ec317fad1aec4298fd13f1fe66558, type: 3}
   seedItem: {fileID: 11400000, guid: d7260d25d68b3e4198f3e32d5a4daa1f, type: 2}

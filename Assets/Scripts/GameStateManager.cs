@@ -1,30 +1,57 @@
-﻿using System.Collections;
-using Game;
+﻿using System;
+using System.Collections;
+using UI.Game;
 using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
 {
-    public int CurrentDay { get; private set; }
-    private GameUIController _gameUIController;
+    public const float NightSceneDurationSeconds = 1.5f;
+    [SerializeField] private int maxHealthLevel = 8;
+    [SerializeField] public int requiredSaturationLevel = 4;
+    private GameUIController _gui;
+    public int CurrentSaturationLevel { get; private set; }
+    private int CurrentHealthLevel { get; set; }
+    private int CurrentDay { get; set; } = 1;
 
-    void Start()
+    private void Start()
     {
-        _gameUIController = FindFirstObjectByType<GameUIController>();
+        CurrentHealthLevel = maxHealthLevel;
+        _gui = FindFirstObjectByType<GameUIController>();
+        _gui.UpdateHealthLevel(CurrentHealthLevel, maxHealthLevel);
+        _gui.UpdateSaturationLevel(CurrentSaturationLevel, requiredSaturationLevel);
+
+        EventBus.Instance.OnDayChanged += ConsumeAndIncreaseSaturation;
     }
-    
-    public void NextDay()
-    {
-        _gameUIController.NightBegin();
 
-        StartCoroutine(NightScene());
-        
+    public void AddSaturationLevel(int level)
+    {
+        CurrentSaturationLevel += level;
+        _gui.UpdateSaturationLevel(CurrentSaturationLevel, requiredSaturationLevel);
+    }
+
+    private void ConsumeAndIncreaseSaturation(int day)
+    {
+        var diff = CurrentSaturationLevel - requiredSaturationLevel;
+        CurrentSaturationLevel = 0;
+        CurrentHealthLevel = diff >= 0
+            ? Math.Clamp(CurrentHealthLevel + 1, 0, maxHealthLevel)
+            : Math.Clamp(CurrentHealthLevel - 1, 0, maxHealthLevel);
+        _gui.UpdateSaturationLevel(Math.Max(0, diff), requiredSaturationLevel);
+        _gui.UpdateHealthLevel(CurrentHealthLevel, maxHealthLevel);
+
+        if (CurrentHealthLevel <= 0)
+        {
+            // TODO: Loose Game
+        }
+
+        if (day % 2 == 0) requiredSaturationLevel += 2;
+    }
+
+    public IEnumerator NextDay()
+    {
+        EventBus.Instance.OnNightStarted?.Invoke();
+        yield return new WaitForSecondsRealtime(NightSceneDurationSeconds);
         CurrentDay++;
         EventBus.Instance.OnDayChanged?.Invoke(CurrentDay);
-    }
-
-    IEnumerator NightScene()
-    {
-        yield return new WaitForSeconds(1.5f);
-        _gameUIController.NightOver();
     }
 }
