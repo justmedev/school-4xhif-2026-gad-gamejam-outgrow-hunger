@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
 {
+    [SerializeField] private Texture2D nightImageGood;
+    [SerializeField] private Texture2D nightImageMid;
+    [SerializeField] private Texture2D nightImageBad;
+    [SerializeField] private Texture2D nightImageBg;
     public int requiredSaturationLevel = 10;
     public const int MaxHealthLevel = 10;
     public int CurrentSaturationLevel { get; private set; }
@@ -50,16 +54,17 @@ public class GameStateManager : MonoBehaviour
 
     public void NextDay()
     {
+        _gui.SetNightImage(nightImageBad, nightImageBg);
         _gui.SwitchToNightUI();
 
         StartCoroutine(WaitForNight());
-
-        CurrentDay++;
-        EventBus.Instance.OnDayChanged?.Invoke(CurrentDay);
     }
 
-    private static IEnumerator WaitForNight()
+    private IEnumerator WaitForNight()
     {
         yield return new WaitForSecondsRealtime(3);
+        
+        CurrentDay++;
+        EventBus.Instance.OnDayChanged?.Invoke(CurrentDay);
     }
 }

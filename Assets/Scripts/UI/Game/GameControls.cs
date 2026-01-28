@@ -10,5 +10,7 @@ namespace UI.Game
         Button ExitButton,
         Label Saturation,
         Label Health,
-        Label Day);
+        Label Day,
+        Image RoomImage,
+        Image NightBackground);
 }
