@@ -30,7 +30,11 @@ namespace UI.Game
             _controls.ReturnToGameButton.clicked += ResumeGame;
             _controls.ExitButton.clicked += ExitGame;
             
-            EventBus.Instance.OnNightStarted += () =>  _isInputAllowed = false;
+            EventBus.Instance.OnNightStarted += () =>
+            {
+                _isInputAllowed = false;
+                SwitchToNightUI();
+            };
             EventBus.Instance.OnDayChanged += day =>
             {
                 _controls.Day.text =  $"{day}";
@@ -60,14 +64,14 @@ namespace UI.Game
             _controls.NightVe.style.display = DisplayStyle.None;
         }
 
-        public void SwitchToNightUI()
+        private void SwitchToNightUI()
         {
             _controls.NightVe.style.display = DisplayStyle.Flex;
             _controls.PauseVe.style.display = DisplayStyle.None;
             _controls.DayVe.style.display = DisplayStyle.None;
         }
 
-        public void SwitchToPauseUI()
+        private void SwitchToPauseUI()
         {
             _controls.PauseVe.style.display = DisplayStyle.Flex;
             _controls.DayVe.style.display = DisplayStyle.None;
