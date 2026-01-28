@@ -20,7 +20,7 @@ namespace UI.Game
 
         private static float _elapsedTimeNightScene;
 
-        private void Start()
+        private void Awake()
         {
             _gsm = FindFirstObjectByType<GameStateManager>();
             _ui = GetComponent<UIDocument>();
