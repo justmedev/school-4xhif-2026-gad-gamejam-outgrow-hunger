@@ -8,17 +8,16 @@ namespace UI.Game
     [RequireComponent(typeof(UIDocument))]
     public class GameUIController : MonoBehaviour
     {
+        private static float _elapsedTimeNightScene;
         [SerializeField] private Texture2D nightImageGood;
         [SerializeField] private Texture2D nightImageMid;
         [SerializeField] private Texture2D nightImageBad;
         [SerializeField] private Texture2D nightImageBg;
+        private GameControls _controls;
 
         private GameStateManager _gsm;
+        private bool _isCurrentlyDay = true;
         private UIDocument _ui;
-        private GameControls _controls;
-        private bool _isInputAllowed = true;
-
-        private static float _elapsedTimeNightScene;
 
         private void Awake()
         {
@@ -45,7 +44,7 @@ namespace UI.Game
 
             EventBus.Instance.OnNightStarted += () =>
             {
-                _isInputAllowed = false;
+                _isCurrentlyDay = false;
                 SwitchToNightUI();
                 var diff = _gsm.CurrentSaturationLevel - _gsm.requiredSaturationLevel;
                 switch (diff)
@@ -65,12 +64,12 @@ namespace UI.Game
             {
                 _controls.Day.text = $"{day}";
                 SwitchToDayUI();
-                _isInputAllowed = true;
+                _isCurrentlyDay = true;
             };
 
             InputSystem.actions.FindAction("Escape").performed += _ =>
             {
-                if (!_isInputAllowed) return;
+                if (!_isCurrentlyDay) return;
                 if (_controls.PauseVe.style.display == DisplayStyle.None)
                 {
                     Time.timeScale = 0;
@@ -84,6 +83,8 @@ namespace UI.Game
 
         private void Update()
         {
+            if (!_isCurrentlyDay) return;
+
             _elapsedTimeNightScene += Time.deltaTime;
             var t = Mathf.Clamp01(_elapsedTimeNightScene / GameStateManager.NightSceneDurationSeconds);
 
@@ -127,7 +128,7 @@ namespace UI.Game
             SwitchToDayUI();
         }
 
-        private void ExitGame()
+        private static void ExitGame()
         {
             Application.Quit();
 #if UNITY_EDITOR

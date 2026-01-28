@@ -2,11 +2,15 @@ using JetBrains.Annotations;
 
 public record CellData
 {
-    [CanBeNull] public Plant Planted;
     public int CurrentGrowthDay;
+    [CanBeNull] public Plant Planted;
 
-    public bool IsEmpty() => Planted == null;
+    public bool IsEmpty()
+    {
+        return !Planted;
+    }
 
+    [CanBeNull]
     public Plant Harvest()
     {
         if (IsEmpty()) return null;

@@ -5,10 +5,9 @@ namespace UI.MainMenu
 {
     public class MainMenuCameraMover : MonoBehaviour
     {
-        private Vector3 _startPosition;
-
         [SerializeField] private float strength;
         [SerializeField] private float smoothness;
+        private Vector3 _startPosition;
 
         private void Start()
         {

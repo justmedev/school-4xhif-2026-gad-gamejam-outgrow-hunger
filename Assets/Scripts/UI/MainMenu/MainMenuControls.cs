@@ -7,7 +7,6 @@ namespace UI.MainMenu
         Button CreditsButton,
         Button ExitButton,
         Button ReturnButton,
-        Label MainMenuLabel,
         VisualElement MainMenuVe,
         VisualElement CreditsVe);
 }

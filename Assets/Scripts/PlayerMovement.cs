@@ -5,11 +5,11 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
-    private InputAction _moveAction;
-    private Rigidbody2D _rb;
-    private Vector2 _movePreviousFrame;
-    private Vector2 _lastMovement;
     private bool _isMovementEnabled = true;
+    private Vector2 _lastMovement;
+    private InputAction _moveAction;
+    private Vector2 _movePreviousFrame;
+    private Rigidbody2D _rb;
 
     private void Awake()
     {

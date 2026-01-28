@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Plant", menuName = "HungryBunnies/Plant", order = 0)]
+[CreateAssetMenu(fileName = "plant", menuName = "HungryBunnies/plant", order = 0)]
 public class Plant : ScriptableObject
 {
     [SerializeField] private string label;

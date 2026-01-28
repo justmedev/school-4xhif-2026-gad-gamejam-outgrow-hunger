@@ -1,14 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class ItemCollectAnimationPlayer : MonoBehaviour
 {
     [SerializeField] private UIDocument prefab;
-    private Queue<Tuple<int, Vector3, Sprite>> _popupQueue = new();
     private bool _isExecutorRunning;
+    private readonly Queue<Tuple<int, Vector3, Sprite>> _popupQueue = new();
 
     public void AddToQueue(int amount, Vector3 worldPosition, Sprite collectedResourceImg)
     {
@@ -28,7 +29,7 @@ public class ItemCollectAnimationPlayer : MonoBehaviour
         _isExecutorRunning = false;
     }
 
-    private void TriggerPopup(Tuple<int, Vector3, Sprite> data)
+    private void TriggerPopup([NotNull] Tuple<int, Vector3, Sprite> data)
     {
         var (amount, worldPosition, collectedResourceImg) = data;
         var doc = Instantiate(prefab, worldPosition, Quaternion.identity);

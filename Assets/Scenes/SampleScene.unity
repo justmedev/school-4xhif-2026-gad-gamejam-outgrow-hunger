@@ -179,8 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12bbcb40c7134083a6486cc3e8bfca94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameStateManager
-  RequiredSaturationLevel: 10
-  requiredSaturationLevel: 10
+  requiredSaturationLevel: 4
 --- !u!1 &69582371
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +439,8 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras: [{fileID: 2118881542}]
+  m_Cameras:
+  - {fileID: 2118881542}
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -496,9 +496,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.0033984706
-    width: 0.999488
-    height: 0.99235344
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -531,7 +531,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: [{fileID: 2118881539}]
+  m_Children:
+  - {fileID: 2118881539}
   m_Father: {fileID: 2027747706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
@@ -7583,9 +7584,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2027747706}
   - component: {fileID: 2027747705}
-  - component: {fileID: 2027747708}
   - component: {fileID: 2027747707}
   - component: {fileID: 2027747709}
+  - component: {fileID: 2027747708}
   - component: {fileID: 2027747710}
   - component: {fileID: 2027747711}
   - component: {fileID: 2027747712}

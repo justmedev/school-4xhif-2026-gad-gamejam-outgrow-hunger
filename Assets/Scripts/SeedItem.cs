@@ -1,14 +1,16 @@
 using IMS;
+using JetBrains.Annotations;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SeedItem", menuName = "HungryBunnies/Seed Item")]
 public class SeedItem : ScriptableObject, IItem
 {
-    public Plant Plant;
+    public Plant plant;
 
+    [NotNull]
     public string GetName()
     {
-        return $"{Plant.Label} Seeds";
+        return $"{plant.Label} Seeds";
     }
 
     public int GetMaxQuantity()
@@ -18,6 +20,6 @@ public class SeedItem : ScriptableObject, IItem
 
     public Sprite GetSprite()
     {
-        return Plant.SeedSprite;
+        return plant.SeedSprite;
     }
 }
