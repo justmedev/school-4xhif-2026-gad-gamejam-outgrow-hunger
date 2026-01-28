@@ -8,46 +8,23 @@ namespace UI.Game
     [RequireComponent(typeof(UIDocument))]
     public class GameUIController : MonoBehaviour
     {
+        [SerializeField] private Texture2D nightImageGood;
+        [SerializeField] private Texture2D nightImageMid;
+        [SerializeField] private Texture2D nightImageBad;
+        [SerializeField] private Texture2D nightImageBg;
+
+        private GameStateManager _gsm;
         private UIDocument _ui;
         private GameControls _controls;
         private bool _isInputAllowed = true;
 
-        private static float _nightSceneTimeProgress = 0.0f;
+        private static float _elapsedTimeNightScene;
 
-        private void Update()
+        private void Start()
         {
-            //_controls.NightBackground.style.translate =
-            //     new Vector2(Mathf.Lerp(-100, 100, _nightSceneTimeProgress), 0);
-            // _controls.RoomImage.style.translate =
-            //     new Vector2(0, (Mathf.Lerp(-75, 75, _nightSceneTimeProgress)));
-            _nightSceneTimeProgress += 0.1f * Time.deltaTime;
-
-            //_controls.NightBackground.style.backgroundPositionX =
-            //    new StyleBackgroundPosition(
-            //        new BackgroundPosition(
-            //            BackgroundPositionKeyword.Left,
-            //            new Length(
-            //                Mathf.Lerp(-100, 100, _nightSceneTimeProgress),
-            //                LengthUnit.Percent
-            //            )
-            //        )
-            //    );
-            
-            _controls.RoomImage.style.backgroundPositionX =
-                new StyleBackgroundPosition(
-                    new BackgroundPosition(
-                        BackgroundPositionKeyword.Left,
-                        new Length(
-                            Mathf.Lerp(0, 200, _nightSceneTimeProgress),
-                            LengthUnit.Percent
-                        )
-                    )
-                );
-        }
-
-        private void Awake()
-        {
+            _gsm = FindFirstObjectByType<GameStateManager>();
             _ui = GetComponent<UIDocument>();
+
             var root = _ui.rootVisualElement;
             _controls = new GameControls(
                 root.Q<VisualElement>("NightVE"),
@@ -61,11 +38,29 @@ namespace UI.Game
                 root.Q<Image>("NightImage"),
                 root.Q<Image>("NightBackground")
             );
-
             _controls.ReturnToGameButton.clicked += ResumeGame;
             _controls.ExitButton.clicked += ExitGame;
 
-            EventBus.Instance.OnNightStarted += () => _isInputAllowed = false;
+            SwitchToDayUI();
+
+            EventBus.Instance.OnNightStarted += () =>
+            {
+                _isInputAllowed = false;
+                SwitchToNightUI();
+                var diff = _gsm.CurrentSaturationLevel - _gsm.requiredSaturationLevel;
+                switch (diff)
+                {
+                    case < 0:
+                        SetNightImage(nightImageBad, nightImageBg);
+                        break;
+                    case 0:
+                        SetNightImage(nightImageMid, nightImageBg);
+                        break;
+                    case > 0:
+                        SetNightImage(nightImageGood, nightImageBg);
+                        break;
+                }
+            };
             EventBus.Instance.OnDayChanged += day =>
             {
                 _controls.Day.text = $"{day}";
@@ -73,7 +68,6 @@ namespace UI.Game
                 _isInputAllowed = true;
             };
 
-            SwitchToDayUI();
             InputSystem.actions.FindAction("Escape").performed += _ =>
             {
                 if (!_isInputAllowed) return;
@@ -88,6 +82,23 @@ namespace UI.Game
             };
         }
 
+        private void Update()
+        {
+            _elapsedTimeNightScene += Time.deltaTime;
+            var t = Mathf.Clamp01(_elapsedTimeNightScene / GameStateManager.NightSceneDurationSeconds);
+
+            _controls.RoomImage.style.backgroundPositionX =
+                new StyleBackgroundPosition(
+                    new BackgroundPosition(
+                        BackgroundPositionKeyword.Left,
+                        new Length(
+                            Mathf.Lerp(0, 100, t),
+                            LengthUnit.Percent
+                        )
+                    )
+                );
+        }
+
         private void SwitchToDayUI()
         {
             _controls.DayVe.style.display = DisplayStyle.Flex;
@@ -95,15 +106,15 @@ namespace UI.Game
             _controls.NightVe.style.display = DisplayStyle.None;
         }
 
-        public void SwitchToNightUI()
+        private void SwitchToNightUI()
         {
             _controls.NightVe.style.display = DisplayStyle.Flex;
             _controls.PauseVe.style.display = DisplayStyle.None;
             _controls.DayVe.style.display = DisplayStyle.None;
-            _nightSceneTimeProgress = 0.0f;
+            _elapsedTimeNightScene = 0.0f;
         }
 
-        public void SwitchToPauseUI()
+        private void SwitchToPauseUI()
         {
             _controls.PauseVe.style.display = DisplayStyle.Flex;
             _controls.DayVe.style.display = DisplayStyle.None;
@@ -124,7 +135,7 @@ namespace UI.Game
 #endif
         }
 
-        public void SetNightImage(Texture2D nightImage, Texture2D nightBackground)
+        private void SetNightImage(Texture2D nightImage, Texture2D nightBackground)
         {
             _controls.NightBackground.style.backgroundImage = nightBackground;
             _controls.RoomImage.style.backgroundImage = nightImage;

@@ -16,7 +16,7 @@ public class House : MonoBehaviour
         {
             if (!_isInHouseRange) return;
             if (!_isSleepEnabled) return;
-            _gsm.NextDay();
+            StartCoroutine(_gsm.NextDay());
         };
 
         EventBus.Instance.OnNightStarted += () => _isSleepEnabled = false;
