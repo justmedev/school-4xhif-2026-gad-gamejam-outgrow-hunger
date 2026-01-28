@@ -50,7 +50,7 @@ public class GameStateManager : MonoBehaviour
 
     public void NextDay()
     {
-        _gui.SwitchToNightUI();
+        EventBus.Instance.OnNightStarted?.Invoke();
 
         StartCoroutine(WaitForNight());
 
