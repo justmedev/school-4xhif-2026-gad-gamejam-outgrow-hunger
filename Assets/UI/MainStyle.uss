@@ -1,0 +1,41 @@
+:root {
+}
+
+Button {
+    -unity-font-definition: url("project://database/Assets/Font/m6x11plus.ttf?fileID=12800000&guid=f2e34ae4be0066f4fa4bdc7bfd7e9af1&type=3#m6x11plus");
+    font-size: 40px;
+    background-size: 100% 100%;
+    min-width: 75%;
+    background-image: url("project://database/Assets/Textures/ButtonBlue.png?fileID=2800000&guid=d899278fd2ce5bbf2bd644b975b387cf&type=3#ButtonBlue");
+    -unity-slice-left: 50;
+    -unity-slice-top: 50;
+    -unity-slice-right: 50;
+    -unity-slice-bottom: 50;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 255, 255);
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+
+Button:hover {
+    -unity-background-image-tint-color: rgb(156, 156, 156);
+    color: rgb(190, 190, 190);
+}
+
+Button.red {
+    background-image: url("project://database/Assets/Textures/ButtonRed.png?fileID=6892458850344700614&guid=4ab6aa098192a24c293edbc715dc2214&type=3#ButtonRed_0");
+}
+
+Label {
+    -unity-font-definition: url("project://database/Assets/Font/m6x11plus.ttf?fileID=12800000&guid=f2e34ae4be0066f4fa4bdc7bfd7e9af1&type=3#m6x11plus");
+}
+
+
+
+

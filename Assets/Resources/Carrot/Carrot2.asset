@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0650be6b7cf34a8ca52eaf3cda1589f1, type: 3}
+  m_Name: Carrot2
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.PlantStage
+  sprite: {fileID: -711501682, guid: 19c1864955192ea40af52d8058e8dbf0, type: 3}
+  doubleSeedChance: 0.15
+  saturation: 1
+  saturationMultiplier: 1

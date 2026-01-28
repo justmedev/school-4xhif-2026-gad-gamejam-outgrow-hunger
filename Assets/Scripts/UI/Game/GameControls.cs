@@ -1,11 +1,16 @@
 ﻿using UnityEngine.UIElements;
 
-namespace Game
+namespace UI.Game
 {
     public record GameControls(
         VisualElement NightVe,
         VisualElement DayVe,
         VisualElement PauseVe,
         Button ReturnToGameButton,
-        Button ExitButton);
+        Button ExitButton,
+        Label Saturation,
+        Label Health,
+        Label Day,
+        Image RoomImage,
+        Image NightBackground);
 }
