@@ -54,7 +54,19 @@ public class GameStateManager : MonoBehaviour
 
     public void NextDay()
     {
-        _gui.SetNightImage(nightImageBad, nightImageBg);
+        var diff = CurrentSaturationLevel - requiredSaturationLevel;
+        if (diff < 0)
+        {
+            _gui.SetNightImage(nightImageBad, nightImageBg);
+        }
+        if (diff == 0)
+        {
+            _gui.SetNightImage(nightImageMid, nightImageBg);
+        }
+        if (diff > 0)
+        {
+            _gui.SetNightImage(nightImageGood, nightImageBg);
+        }
         _gui.SwitchToNightUI();
 
         StartCoroutine(WaitForNight());
