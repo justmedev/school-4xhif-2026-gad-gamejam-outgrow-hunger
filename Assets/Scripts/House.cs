@@ -6,6 +6,7 @@ public class House : MonoBehaviour
     private InputAction _interactAction;
     private GameStateManager _gsm;
     private bool _isInHouseRange;
+    public bool canSleep = true;
 
     private void OnEnable()
     {
@@ -14,6 +15,7 @@ public class House : MonoBehaviour
         _interactAction.performed += _ =>
         {
             if (!_isInHouseRange) return;
+            if (!canSleep) return;
             _gsm.NextDay();
         };
     }
