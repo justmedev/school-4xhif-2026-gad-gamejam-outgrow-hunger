@@ -151,6 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventoryHolder
   startItems:
   - {fileID: 11400000, guid: d7260d25d68b3e4198f3e32d5a4daa1f, type: 2}
+  - {fileID: 11400000, guid: 79a7f4b197e703347bbd02f7655ebe6e, type: 2}
+  - {fileID: 11400000, guid: d9bfa35de49286248a73396e4c33394a, type: 2}
   doc: {fileID: 1985372252}
 --- !u!4 &64101953
 Transform:
@@ -179,6 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12bbcb40c7134083a6486cc3e8bfca94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameStateManager
+  maxHealthLevel: 8
   requiredSaturationLevel: 4
 --- !u!1 &69582371
 GameObject:
@@ -496,9 +499,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.0033975085
     width: 1
-    height: 1
+    height: 0.99207246
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34

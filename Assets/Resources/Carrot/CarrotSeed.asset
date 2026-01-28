@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d4a085651d410cb1658eec5f65b154, type: 3}
   m_Name: CarrotSeed
   m_EditorClassIdentifier: Assembly-CSharp::SeedItem
-  Plant: {fileID: 11400000, guid: f94b87eb89d82fe4ab38e9c1c16ce396, type: 2}
+  plant: {fileID: 11400000, guid: f94b87eb89d82fe4ab38e9c1c16ce396, type: 2}

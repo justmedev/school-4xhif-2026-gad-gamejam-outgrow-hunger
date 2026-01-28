@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ab0a67662f4a80b3ad5f2d9afe5372, type: 3}
   m_Name: Lettuce
   m_EditorClassIdentifier: Assembly-CSharp::Plant
-  label: Bellpepper
+  label: Lettuce
   stages:
-  - {fileID: 11400000, guid: c1630cd1aa86cc5abb463d63a7e0968f, type: 2}
-  - {fileID: 11400000, guid: 9fe7beba2f0dd08778944c5726174e13, type: 2}
-  - {fileID: 11400000, guid: e4f0cf8f50dee60028daff73cdb18db6, type: 2}
-  resourceSprite: {fileID: 21300000, guid: 673d04f13c7299045bfe8f5654d5b73e, type: 3}
-  seedSprite: {fileID: 21300000, guid: 061962da68f4daf479992267620d7613, type: 3}
-  seedItem: {fileID: 11400000, guid: 79a7f4b197e703347bbd02f7655ebe6e, type: 2}
+  - {fileID: 11400000, guid: 4b890ec6961d7774a9b2764b50812fd2, type: 2}
+  - {fileID: 11400000, guid: c92cd746351ef5b41bd2e2d343751dd5, type: 2}
+  resourceSprite: {fileID: 21300000, guid: c56220ad3f95f6546b8c09c3c8a46279, type: 3}
+  seedSprite: {fileID: 21300000, guid: 44c2346fce0232b48b9bb88da162792b, type: 3}
+  seedItem: {fileID: 11400000, guid: d9bfa35de49286248a73396e4c33394a, type: 2}

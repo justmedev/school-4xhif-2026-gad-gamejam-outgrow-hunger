@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ab0a67662f4a80b3ad5f2d9afe5372, type: 3}
   m_Name: Carrot
   m_EditorClassIdentifier: Assembly-CSharp::Plant
-  label: Bellpepper
+  label: Carrot
   stages:
-  - {fileID: 11400000, guid: c1630cd1aa86cc5abb463d63a7e0968f, type: 2}
-  - {fileID: 11400000, guid: 9fe7beba2f0dd08778944c5726174e13, type: 2}
-  - {fileID: 11400000, guid: e4f0cf8f50dee60028daff73cdb18db6, type: 2}
+  - {fileID: 11400000, guid: db47d2aa266231a44afc46f25aa59071, type: 2}
+  - {fileID: 11400000, guid: 6caaeca9f16b8874b804a593e3fe2479, type: 2}
+  - {fileID: 11400000, guid: fd5a1386134d5184d9270f6bbeb61f28, type: 2}
+  - {fileID: 11400000, guid: 6171445ae432769499f94afaf0379d2e, type: 2}
   resourceSprite: {fileID: 21300000, guid: 673d04f13c7299045bfe8f5654d5b73e, type: 3}
   seedSprite: {fileID: 21300000, guid: 061962da68f4daf479992267620d7613, type: 3}
   seedItem: {fileID: 11400000, guid: 79a7f4b197e703347bbd02f7655ebe6e, type: 2}
