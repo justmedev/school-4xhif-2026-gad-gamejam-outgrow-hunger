@@ -1,0 +1,47 @@
+:root {
+}
+
+.collect-popup {
+    transition-property: opacity, translate;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    position: absolute;
+    opacity: 0;
+    flex-direction: row;
+    align-items: center;
+    translate: 0 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-bottom: 5px;
+    padding-left: 8px;
+    padding-right: 6px;
+}
+
+.collect-popup > Label {
+    color: white;
+    margin-top: 4px;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 33;
+}
+
+.collect-popup > Image {
+    height: 30px;
+    aspect-ratio: 1;
+    background-size: cover;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.collect-popup-active {
+    opacity: 1;
+    translate: 0 -150%;
+}
+
+.collect-popup-fadeout {
+    opacity: 0;
+    translate: 0 -300%;
+}
