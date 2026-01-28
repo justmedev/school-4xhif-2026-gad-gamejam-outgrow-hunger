@@ -10,6 +10,7 @@ namespace UI.Game
     {
         private UIDocument _ui;
         private GameControls _controls;
+        private bool _isInputAllowed = true;
 
         private void Awake()
         {
@@ -29,15 +30,18 @@ namespace UI.Game
             _controls.ReturnToGameButton.clicked += ResumeGame;
             _controls.ExitButton.clicked += ExitGame;
             
+            EventBus.Instance.OnNightStarted += () =>  _isInputAllowed = false;
             EventBus.Instance.OnDayChanged += day =>
             {
                 _controls.Day.text =  $"{day}";
                 SwitchToDayUI();
+                _isInputAllowed = true;
             }; 
 
             SwitchToDayUI();
             InputSystem.actions.FindAction("Escape").performed += _ =>
             {
+                if (!_isInputAllowed) return;
                 if (_controls.PauseVe.style.display == DisplayStyle.None)
                 {
                     Time.timeScale = 0;

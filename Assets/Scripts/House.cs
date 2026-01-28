@@ -6,7 +6,7 @@ public class House : MonoBehaviour
     private InputAction _interactAction;
     private GameStateManager _gsm;
     private bool _isInHouseRange;
-    public bool canSleep = true;
+    private bool _isSleepEnabled = true;
 
     private void OnEnable()
     {
@@ -15,9 +15,12 @@ public class House : MonoBehaviour
         _interactAction.performed += _ =>
         {
             if (!_isInHouseRange) return;
-            if (!canSleep) return;
+            if (!_isSleepEnabled) return;
             _gsm.NextDay();
         };
+
+        EventBus.Instance.OnNightStarted += () => _isSleepEnabled = false;
+        EventBus.Instance.OnDayChanged += _ => _isSleepEnabled = true;
     }
 
     private void OnCollisionEnter2D(Collision2D col)
