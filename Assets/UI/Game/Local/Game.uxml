@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Game/GameStyle.uss?fileID=7433441132597879392&amp;guid=c8bf99de3f6ffeec9b8c03853056aa91&amp;type=3#GameStyle"/>
+    <Style src="project://database/Assets/UI/Game/Local/GameStyle.uss?fileID=7433441132597879392&amp;guid=c8bf99de3f6ffeec9b8c03853056aa91&amp;type=3"/>
     <Style src="project://database/Assets/UI/MainStyle.uss?fileID=7433441132597879392&amp;guid=002115899abc1014d8549fb254dca04e&amp;type=3#MainStyle"/>
     <ui:VisualElement name="DayVE" style="flex-grow: 1; justify-content: space-between; display: flex;">
         <ui:VisualElement style="flex-grow: 0; flex-direction: row; justify-content: space-between; margin-top: 10px; margin-left: 20px; margin-right: 20px;">
