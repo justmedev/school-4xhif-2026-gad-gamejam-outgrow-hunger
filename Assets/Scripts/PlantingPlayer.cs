@@ -52,8 +52,21 @@ public class PlantingPlayer : MonoBehaviour
 
     private void SetPlantingTileFromStage(Vector3Int cellPos, [NotNull] PlantStage stage)
     {
-        var tile = ScriptableObject.CreateInstance<Tile>();
-        tile.sprite = stage.Sprite;
+        TileBase tile;
+        if (stage.AnimatedSprites.Length == 0)
+        {
+            tile = ScriptableObject.CreateInstance<Tile>();
+            ((Tile)tile).sprite = stage.Sprite;
+        }
+        else
+        {
+            tile = ScriptableObject.CreateInstance<AnimatedTile>();
+            var animated = (AnimatedTile)tile;
+            animated.m_AnimatedSprites = stage.AnimatedSprites;
+            animated.m_MinSpeed = 1;
+            animated.m_MaxSpeed = 1;
+        }
+
         cropTilemap.SetTile(cellPos, tile);
     }
 
