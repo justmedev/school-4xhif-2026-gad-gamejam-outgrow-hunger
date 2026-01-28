@@ -7,5 +7,8 @@ namespace UI.Game
         VisualElement DayVe,
         VisualElement PauseVe,
         Button ReturnToGameButton,
-        Button ExitButton);
+        Button ExitButton,
+        Label Saturation,
+        Label Health,
+        Label Day);
 }
