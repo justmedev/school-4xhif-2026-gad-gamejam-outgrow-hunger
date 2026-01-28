@@ -48,18 +48,11 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public void NextDay()
+    public IEnumerator NextDay()
     {
         EventBus.Instance.OnNightStarted?.Invoke();
-
-        StartCoroutine(WaitForNight());
-
+        yield return new WaitForSecondsRealtime(3);
         CurrentDay++;
         EventBus.Instance.OnDayChanged?.Invoke(CurrentDay);
-    }
-
-    private static IEnumerator WaitForNight()
-    {
-        yield return new WaitForSecondsRealtime(3);
     }
 }
