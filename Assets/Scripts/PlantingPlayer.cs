@@ -8,11 +8,14 @@ using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(ItemCollectAnimationPlayer))]
+[RequireComponent(typeof(Animator))]
 public class PlantingPlayer : MonoBehaviour
 {
+    private static readonly int AnimPropHarvest = Animator.StringToHash("Harvest");
     [SerializeField] private Tilemap cropTilemap;
     [SerializeField] private Tilemap fieldTilemap;
     private readonly Dictionary<Vector3Int, CellData> _fieldData = new();
+    private Animator _anim;
     private ItemCollectAnimationPlayer _collectItemAnimPlayer;
     private GameStateManager _gsm;
     private InventoryHolder _hotbarHolder;
@@ -20,6 +23,7 @@ public class PlantingPlayer : MonoBehaviour
 
     private void Start()
     {
+        _anim = GetComponent<Animator>();
         _collectItemAnimPlayer = GetComponent<ItemCollectAnimationPlayer>();
         _gsm = FindFirstObjectByType<GameStateManager>();
         EventBus.Instance.OnDayChanged += _ =>
@@ -61,6 +65,7 @@ public class PlantingPlayer : MonoBehaviour
             var cell = _fieldData[cellPos];
             if (!cell.IsEmpty())
             {
+                if (cell.CurrentGrowthDay == 0) return;
                 HarvestAtPos(cellPos);
                 return;
             }
@@ -90,6 +95,7 @@ public class PlantingPlayer : MonoBehaviour
         if (harvested == null) return;
         var stage = harvested.Stages[growthDay];
 
+        _anim.SetTrigger(AnimPropHarvest);
         cropTilemap.SetTile(cellPos, null);
 
         var seedQty = 1;
