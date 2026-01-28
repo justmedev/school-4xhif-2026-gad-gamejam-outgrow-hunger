@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
 {
+    public const float NightSceneDurationSeconds = 1.5f;
     public int requiredSaturationLevel = 10;
     public const int MaxHealthLevel = 10;
     public int CurrentSaturationLevel { get; private set; }
@@ -51,7 +52,7 @@ public class GameStateManager : MonoBehaviour
     public IEnumerator NextDay()
     {
         EventBus.Instance.OnNightStarted?.Invoke();
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(NightSceneDurationSeconds);
         CurrentDay++;
         EventBus.Instance.OnDayChanged?.Invoke(CurrentDay);
     }
