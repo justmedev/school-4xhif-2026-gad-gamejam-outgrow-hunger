@@ -39,7 +39,7 @@ public class GameStateManager : MonoBehaviour
         CurrentHealthLevel = diff >= 0
             ? Math.Clamp(CurrentHealthLevel + 1, 0, maxHealthLevel)
             : Math.Clamp(CurrentHealthLevel - 1, 0, maxHealthLevel);
-        _gui.UpdateSaturationLevel(Math.Max(0, diff), requiredSaturationLevel);
+        _gui.UpdateSaturationLevel(0, requiredSaturationLevel);
         _gui.UpdateHealthLevel(CurrentHealthLevel, maxHealthLevel);
 
         if (day % 2 == 0) requiredSaturationLevel += 2;
