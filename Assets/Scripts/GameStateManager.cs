@@ -2,6 +2,7 @@
 using System.Collections;
 using UI.Game;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private int maxHealthLevel = 8;
     [SerializeField] public int requiredSaturationLevel = 4;
     private GameUIController _gui;
+    private GlobalGameState _ggs;
     public int CurrentSaturationLevel { get; private set; }
     private int CurrentHealthLevel { get; set; }
     private int CurrentDay { get; set; } = 1;
@@ -16,6 +18,7 @@ public class GameStateManager : MonoBehaviour
     private void Start()
     {
         CurrentHealthLevel = maxHealthLevel;
+        _ggs = FindFirstObjectByType<GlobalGameState>();
         _gui = FindFirstObjectByType<GameUIController>();
         _gui.UpdateHealthLevel(CurrentHealthLevel, maxHealthLevel);
         _gui.UpdateSaturationLevel(CurrentSaturationLevel, requiredSaturationLevel);
@@ -39,11 +42,6 @@ public class GameStateManager : MonoBehaviour
         _gui.UpdateSaturationLevel(Math.Max(0, diff), requiredSaturationLevel);
         _gui.UpdateHealthLevel(CurrentHealthLevel, maxHealthLevel);
 
-        if (CurrentHealthLevel <= 0)
-        {
-            // TODO: Loose Game
-        }
-
         if (day % 2 == 0) requiredSaturationLevel += 2;
     }
 
@@ -53,5 +51,10 @@ public class GameStateManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(NightSceneDurationSeconds);
         CurrentDay++;
         EventBus.Instance.OnDayChanged?.Invoke(CurrentDay);
+        if (CurrentHealthLevel <= 0)
+        {
+            _ggs.FinalDay = CurrentDay - 2;
+            SceneManager.LoadScene("Lose");
+        }
     }
 }
