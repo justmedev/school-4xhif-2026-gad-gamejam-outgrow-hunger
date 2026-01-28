@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(ItemCollectAnimationPlayer))]
 public class PlantingPlayer : MonoBehaviour
 {
     [SerializeField] private Tilemap cropTilemap;
@@ -14,9 +15,11 @@ public class PlantingPlayer : MonoBehaviour
     private readonly Dictionary<Vector3Int, CellData> _fieldData = new();
     private InventoryHolder _hotbarHolder;
     private GameStateManager _gsm;
+    private ItemCollectAnimationPlayer _collectItemAnimPlayer;
 
     private void Start()
     {
+        _collectItemAnimPlayer = GetComponent<ItemCollectAnimationPlayer>();
         _gsm = FindFirstObjectByType<GameStateManager>();
         EventBus.Instance.OnDayChanged += day =>
         {
@@ -90,15 +93,27 @@ public class PlantingPlayer : MonoBehaviour
 
         cropTilemap.SetTile(cellPos, null);
 
-        var qty = 1;
+        var seedQty = 1;
         if (growthDay <= 0) return; // No seeds at all on day 1
         if (Random.value < stage.DoubleSeedChance)
         {
-            qty = 2;
+            seedQty = 2;
         }
 
         _gsm.AddSaturationLevel(stage.Saturation);
-        HotbarFillFirstAvailableSpace(new ItemStack(harvested.SeedItem, qty));
+        HotbarFillFirstAvailableSpace(new ItemStack(harvested.SeedItem, seedQty));
+
+        _collectItemAnimPlayer.AddToQueue(
+            seedQty,
+            new Vector2(transform.position.x, transform.position.y + .5f),
+            harvested.SeedSprite
+        );
+
+        _collectItemAnimPlayer.AddToQueue(
+            stage.Saturation,
+            new Vector2(transform.position.x, transform.position.y + .5f),
+            harvested.ResourceSprite
+        );
     }
 
     private void HotbarFillFirstAvailableSpace(ItemStack stack)
