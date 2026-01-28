@@ -29,14 +29,10 @@ namespace UI.Game
             _elapsedTimeNightScene += Time.deltaTime;
             var t = Mathf.Clamp01(_elapsedTimeNightScene / GameStateManager.NightSceneDurationSeconds);
 
-            _controls.RoomImage.style.backgroundPositionX =
-                new StyleBackgroundPosition(
-                    new BackgroundPosition(
-                        BackgroundPositionKeyword.Left,
-                        new Length(
-                            Mathf.Lerp(0, 100, t),
-                            LengthUnit.Percent
-                        )
+            _controls.RoomImage.style.left =
+                new StyleLength(new Length(
+                        Mathf.Lerp(0, -10, t),
+                        LengthUnit.Percent
                     )
                 );
         }
