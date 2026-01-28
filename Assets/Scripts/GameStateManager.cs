@@ -7,13 +7,23 @@ using UnityEngine.SceneManagement;
 public class GameStateManager : MonoBehaviour
 {
     public const float NightSceneDurationSeconds = 1.5f;
+    [SerializeField] private GameObject audioManagerPrefab;
     [SerializeField] private int maxHealthLevel = 8;
     [SerializeField] public int requiredSaturationLevel = 4;
-    private GameUIController _gui;
     private GlobalGameState _ggs;
+    private GameUIController _gui;
     public int CurrentSaturationLevel { get; private set; }
     private int CurrentHealthLevel { get; set; }
     private int CurrentDay { get; set; } = 1;
+
+    private void Awake()
+    {
+        var audioMan = FindFirstObjectByType<AudioManager>();
+        if (audioMan != null) return;
+        Debug.Log("Adding audio manager ourselves, because it was not found. This may produce warnings.");
+        var go = Instantiate(audioManagerPrefab, transform.root);
+        go.GetComponent<AudioManager>().LoadAllAudioClips();
+    }
 
     private void Start()
     {

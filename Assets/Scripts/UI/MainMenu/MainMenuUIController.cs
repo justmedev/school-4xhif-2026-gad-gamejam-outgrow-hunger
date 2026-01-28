@@ -7,12 +7,15 @@ namespace UI.MainMenu
 {
     public class MainMenuUIController : MonoBehaviour
     {
+        private AudioManager _audioMan;
         private MainMenuControls _controls;
         private UIDocument _uiDoc;
 
-        private void Awake()
+        private void OnEnable()
         {
             _uiDoc = GetComponent<UIDocument>();
+            _audioMan = FindFirstObjectByType<AudioManager>();
+
             var root = _uiDoc.rootVisualElement;
             _controls = new MainMenuControls(
                 root.Q<Button>("StartButton"),
@@ -32,6 +35,7 @@ namespace UI.MainMenu
         private void OnStartButtonClicked()
         {
             _uiDoc.rootVisualElement.SetEnabled(false);
+            _audioMan.LoadAllAudioClips();
             SceneManager.LoadScene("SampleScene");
         }
 
