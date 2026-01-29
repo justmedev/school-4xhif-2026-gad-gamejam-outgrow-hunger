@@ -1,0 +1,21 @@
+:root {
+}
+
+.unity-progress-bar__background {
+    background-color: rgb(241, 208, 167);
+}
+
+.unity-progress-bar__progress {
+    background-color: rgb(95, 80, 62);
+}
+
+.unity-progress-bar__title-container {
+    -unity-font-definition: url("project://database/Assets/Font/m6x11plus.ttf?fileID=12800000&guid=f2e34ae4be0066f4fa4bdc7bfd7e9af1&type=3#m6x11plus");
+    font-size: 10px;
+}
+
+.unity-progress-bar__background {
+}
+
+.unity-progress-bar__container {
+}

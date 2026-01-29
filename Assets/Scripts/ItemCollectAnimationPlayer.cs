@@ -8,8 +8,8 @@ using UnityEngine.UIElements;
 public class ItemCollectAnimationPlayer : MonoBehaviour
 {
     [SerializeField] private UIDocument prefab;
-    private bool _isExecutorRunning;
     private readonly Queue<Tuple<int, Vector3, Sprite>> _popupQueue = new();
+    private bool _isExecutorRunning;
 
     public void AddToQueue(int amount, Vector3 worldPosition, Sprite collectedResourceImg)
     {
@@ -38,7 +38,7 @@ public class ItemCollectAnimationPlayer : MonoBehaviour
         container.AddToClassList("collect-popup");
 
         var label = new Label { text = $"+{amount}" };
-        if (amount < 0) label.text = $"-{amount}";
+        if (amount < 0) label.text = $"{amount}";
         container.Add(label);
 
         var image = new Image { sprite = collectedResourceImg };

@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(ItemCollectAnimationPlayer))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(PlayerInteractionNotifier))]
 public class PlantingPlayer : MonoBehaviour
 {
     private static readonly int AnimPropHarvest = Animator.StringToHash("Harvest");
@@ -25,9 +26,12 @@ public class PlantingPlayer : MonoBehaviour
     private GameStateManager _gsm;
     private InventoryHolder _hotbarHolder;
     private InputAction _interactAction;
+    private PlayerInteractionNotifier _interactionNotifier;
+    private bool _wasHighlightedLastFrame = false;
 
     private void Start()
     {
+        _interactionNotifier = GetComponent<PlayerInteractionNotifier>();
         _anim = GetComponent<Animator>();
         _collectItemAnimPlayer = GetComponent<ItemCollectAnimationPlayer>();
         _audioSource = GetComponent<AudioSource>();
@@ -62,8 +66,16 @@ public class PlantingPlayer : MonoBehaviour
     {
         highlightTilemap.ClearAllTiles();
         var cellPos = fieldTilemap.WorldToCell(transform.position);
-        if (!_fieldData.ContainsKey(cellPos)) return;
+        if (!_fieldData.ContainsKey(cellPos))
+        {
+            if (_wasHighlightedLastFrame) _interactionNotifier.HidePressEMessage();
+            _wasHighlightedLastFrame = false;
+            return;
+        }
+
         highlightTilemap.SetTile(cellPos, highlightTile);
+        _interactionNotifier.ShowPressEMessage();
+        _wasHighlightedLastFrame = true;
     }
 
     private void SetPlantingTileFromStage(Vector3Int cellPos, [NotNull] PlantStage stage)
@@ -135,7 +147,7 @@ public class PlantingPlayer : MonoBehaviour
         if (Random.value < stage.DoubleSeedChance) seedQty = 2;
 
         _gsm.AddSaturationLevel(stage.Saturation);
-        HotbarFillFirstAvailableSpace(new ItemStack(harvested.SeedItem, seedQty));
+        _hotbarHolder.FillFirstAvailableSpace(new ItemStack(harvested.SeedItem, seedQty));
 
         _collectItemAnimPlayer.AddToQueue(
             seedQty,
@@ -148,26 +160,6 @@ public class PlantingPlayer : MonoBehaviour
             new Vector2(transform.position.x, transform.position.y + .5f),
             harvested.ResourceSprite
         );
-    }
-
-    private void HotbarFillFirstAvailableSpace(ItemStack stack)
-    {
-        var inv = _hotbarHolder.Hotbar;
-        foreach (var slot in inv.Slots)
-        {
-            if (slot.IsEmpty || slot.ItemStack == null)
-            {
-                slot.PlaceItemStack(stack);
-                inv.PropagateChange(slot.Index);
-                return;
-            }
-
-            if (!slot.ItemStack.Equals(stack)) continue;
-
-            stack = slot.ItemStack.AddStack(stack);
-            inv.PropagateChange(slot.Index);
-            if (stack.IsEmpty) return;
-        }
     }
 
     private void AddMissingTilesToFieldData()
