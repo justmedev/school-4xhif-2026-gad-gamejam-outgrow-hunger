@@ -113,6 +113,10 @@ namespace UI.Game
             {
                 _controls.TutorialVe.style.display = DisplayStyle.None;
             };
+            InputSystem.actions.FindAction("Escape").performed += _ =>
+            {
+                _controls.TutorialVe.style.display = DisplayStyle.None;
+            };
         }
 
         private void SwitchToDayUI()
