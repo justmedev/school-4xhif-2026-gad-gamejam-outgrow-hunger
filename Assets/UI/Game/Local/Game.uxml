@@ -36,7 +36,7 @@
             <ui:Button text="Exit Game" name="ExitGameButton" style="width: 100%;"/>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="TutorialVE" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
-        <ui:Label text="Health is how many days your children can survive without Food.&#10;Saturation is how much Food you gathered during the day.&#10;Saturation resets at night.&#10;When you go to the house and press Interact, you go to sleep.&#10;&#10;Press E to dismiss." name="TutorialText" style="-unity-text-align: upper-center; white-space: normal; flex-grow: 1; flex-wrap: wrap; margin-left: 2%; margin-right: 2%; font-size: 25px; flex-shrink: 1; align-self: center; margin-top: 2%; margin-bottom: 2%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
+    <ui:VisualElement name="TutorialVE" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 0; bottom: 0; flex-direction: column; justify-content: center;">
+        <ui:Label text="Health is how many days your children can survive without Food.&#10;Saturation is how much Food you gathered during the day.&#10;Saturation resets at night.&#10;When you go to the house and press Interact, you go to sleep.&#10;&#10;Press E to dismiss." name="TutorialText" style="-unity-text-align: middle-center; white-space: normal; flex-grow: 0; flex-wrap: wrap; margin-left: 0; margin-right: 0; flex-shrink: 1; align-self: center; margin-top: 0; margin-bottom: 0; padding-top: 25px; padding-right: 25px; padding-bottom: 25px; padding-left: 25px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; color: rgb(95, 80, 62); background-color: rgb(241, 208, 167);"/>
     </ui:VisualElement>
 </ui:UXML>
