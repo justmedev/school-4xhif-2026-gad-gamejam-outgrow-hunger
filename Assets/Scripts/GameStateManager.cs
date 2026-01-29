@@ -63,7 +63,7 @@ public class GameStateManager : MonoBehaviour
         EventBus.Instance.OnDayChanged?.Invoke(CurrentDay);
         if (CurrentHealthLevel <= 0)
         {
-            _ggs.FinalDay = CurrentDay - 2;
+            _ggs.FinalDay = CurrentDay - 1;
             SceneManager.LoadScene("Lose");
         }
     }
