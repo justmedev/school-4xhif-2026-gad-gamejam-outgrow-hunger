@@ -153,6 +153,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d7260d25d68b3e4198f3e32d5a4daa1f, type: 2}
   - {fileID: 11400000, guid: 79a7f4b197e703347bbd02f7655ebe6e, type: 2}
   - {fileID: 11400000, guid: d9bfa35de49286248a73396e4c33394a, type: 2}
+  - {fileID: 11400000, guid: 56dca018dbcb5e54799139706070a511, type: 2}
   startItems:
   - {fileID: 11400000, guid: d9bfa35de49286248a73396e4c33394a, type: 2}
   doc: {fileID: 1985372252}
@@ -501,10 +502,17 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
+<<<<<<< Updated upstream
     x: 0
     y: 0
     width: 1
     height: 1.0002977
+=======
+    x: 0.00052083336
+    y: 0
+    width: 0.7270834
+    height: 0.35925925
+>>>>>>> Stashed changes
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34

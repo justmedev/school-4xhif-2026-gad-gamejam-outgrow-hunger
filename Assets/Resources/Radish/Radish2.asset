@@ -10,14 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0650be6b7cf34a8ca52eaf3cda1589f1, type: 3}
-  m_Name: BellPepper1
+  m_Name: Radish2
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.PlantStage
-  sprite: {fileID: -7712856396841174223, guid: 275b0f786b8a2e44ba7ae8d4527de64e, type: 3}
-  animatedSprites: []
-<<<<<<< Updated upstream
-  doubleSeedChance: 0.1
-  saturation: 1
-=======
-  doubleSeedChance: 0.005
-  saturation: 0
->>>>>>> Stashed changes
+  sprite: {fileID: 7462428820912353608, guid: 31ae8751acc7f37458c800a9f389396c, type: 3}
+  animatedSprites:
+  - {fileID: 7462428820912353608, guid: 31ae8751acc7f37458c800a9f389396c, type: 3}
+  - {fileID: 3274742339381484095, guid: 31ae8751acc7f37458c800a9f389396c, type: 3}
+  doubleSeedChance: 0.5
+  saturation: 2
