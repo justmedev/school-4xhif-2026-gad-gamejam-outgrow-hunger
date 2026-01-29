@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &72150066161759789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1777140074432645852}
+  - component: {fileID: 7460321458343577301}
+  m_Layer: 0
+  m_Name: -- Audio Manager --
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1777140074432645852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72150066161759789}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7460321458343577301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72150066161759789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df5f449e98e4502942ccaa2f092f09f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  harvestClips:
+  - {fileID: 8300000, guid: 61f0832f77b32e14ea8e80a50c724da2, type: 3}
+  - {fileID: 8300000, guid: a8f9c31d97a66594395eb35c5da0f7c2, type: 3}
+  - {fileID: 8300000, guid: a0ab22dcef156f4438c3d473896cb78f, type: 3}
+  plantClips:
+  - {fileID: 8300000, guid: ae37dfff203794d4e8d833aa2a0d6ede, type: 3}
+  stepClips:
+  - {fileID: 8300000, guid: e15255743d8a6794b80d75f2a661ddfa, type: 3}
+  - {fileID: 8300000, guid: da394ca21fe61274baa69445aeb2bb8b, type: 3}
+  - {fileID: 8300000, guid: 811b06198dcab734d85154eef66c73ee, type: 3}
+  - {fileID: 8300000, guid: 0862686c2dab43a4aa8bc084078bb231, type: 3}
+  - {fileID: 8300000, guid: aa2ab0cd0548c244cadbcd1bbdf6f18c, type: 3}
+  badNightClip: {fileID: 8300000, guid: 91315e7bbda9eb6439053c3b1b5eba0f, type: 3}
+  midNightClip: {fileID: 8300000, guid: 53c713a9388e1e14eaad7fdf56552d1d, type: 3}
+  goodNightClip: {fileID: 8300000, guid: a10f847dd2fdc454a9b9c48082085570, type: 3}
+  backgroundMusic: {fileID: 8300000, guid: 37e8e2e3cf0fd0246a97c36e3a23a3de, type: 3}

@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 namespace UI.Game
 {
     [RequireComponent(typeof(UIDocument))]
+    [RequireComponent(typeof(AudioSource))]
     public class GameUIController : MonoBehaviour
     {
         private static float _elapsedTimeNightScene;
@@ -13,16 +14,35 @@ namespace UI.Game
         [SerializeField] private Texture2D nightImageMid;
         [SerializeField] private Texture2D nightImageBad;
         [SerializeField] private Texture2D nightImageBg;
-        private GameControls _controls;
 
+        private AudioManager _audioMan;
+        private AudioSource _audioSource;
+        private GameControls _controls;
         private GameStateManager _gsm;
         private bool _isCurrentlyDay = true;
         private UIDocument _ui;
 
-        private void Awake()
+        private void Update()
+        {
+            if (_isCurrentlyDay) return;
+
+            _elapsedTimeNightScene += Time.deltaTime;
+            var t = Mathf.Clamp01(_elapsedTimeNightScene / GameStateManager.NightSceneDurationSeconds);
+
+            _controls.RoomImage.style.left =
+                new StyleLength(new Length(
+                        Mathf.Lerp(0, -10, t),
+                        LengthUnit.Percent
+                    )
+                );
+        }
+
+        private void OnEnable()
         {
             _gsm = FindFirstObjectByType<GameStateManager>();
             _ui = GetComponent<UIDocument>();
+            _audioMan = FindFirstObjectByType<AudioManager>();
+            _audioSource = GetComponent<AudioSource>();
 
             var root = _ui.rootVisualElement;
             _controls = new GameControls(
@@ -47,21 +67,26 @@ namespace UI.Game
                 _isCurrentlyDay = false;
                 SwitchToNightUI();
                 var diff = _gsm.CurrentSaturationLevel - _gsm.requiredSaturationLevel;
+                _audioMan.DuckBackgroundMusic();
                 switch (diff)
                 {
                     case < 0:
                         SetNightImage(nightImageBad, nightImageBg);
+                        _audioSource.PlayOneShot(_audioMan.BadNightClip, .7f);
                         break;
                     case 0:
                         SetNightImage(nightImageMid, nightImageBg);
+                        _audioSource.PlayOneShot(_audioMan.MidNightClip, .7f);
                         break;
                     case > 0:
                         SetNightImage(nightImageGood, nightImageBg);
+                        _audioSource.PlayOneShot(_audioMan.GoodNightClip, .7f);
                         break;
                 }
             };
             EventBus.Instance.OnDayChanged += day =>
             {
+                _audioMan.UnDuckBackgroundMusic();
                 _controls.Day.text = $"{day}";
                 SwitchToDayUI();
                 _isCurrentlyDay = true;
@@ -79,25 +104,6 @@ namespace UI.Game
 
                 ResumeGame();
             };
-        }
-
-        private void Update()
-        {
-            if (_isCurrentlyDay) return;
-
-            _elapsedTimeNightScene += Time.deltaTime;
-            var t = Mathf.Clamp01(_elapsedTimeNightScene / GameStateManager.NightSceneDurationSeconds);
-
-            _controls.RoomImage.style.backgroundPositionX =
-                new StyleBackgroundPosition(
-                    new BackgroundPosition(
-                        BackgroundPositionKeyword.Left,
-                        new Length(
-                            Mathf.Lerp(0, 100, t),
-                            LengthUnit.Percent
-                        )
-                    )
-                );
         }
 
         private void SwitchToDayUI()

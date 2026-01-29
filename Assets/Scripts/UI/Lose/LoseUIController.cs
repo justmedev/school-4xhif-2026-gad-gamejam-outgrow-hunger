@@ -1,16 +1,16 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEditor;
 
 namespace UI.Lose
 {
     public class LoseUIController : MonoBehaviour
     {
         private LoseControls _controls;
-        private UIDocument _uiDoc;
         private GlobalGameState _ggs;
+        private UIDocument _uiDoc;
 
-        private void Awake()
+        private void OnEnable()
         {
             _ggs = FindFirstObjectByType<GlobalGameState>();
             _uiDoc = GetComponent<UIDocument>();
