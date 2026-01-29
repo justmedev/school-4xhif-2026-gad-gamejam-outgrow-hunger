@@ -752,6 +752,10 @@ Tilemap:
     m_Data: {r: 0.8574294, g: 0.53787553, b: 0.5382495, a: 1}
   - m_RefCount: 1
     m_Data: {r: 0.74259305, g: 0.4025143, b: 0.44863436, a: 1}
+  - m_RefCount: 1
+    m_Data: {r: 0.89324236, g: 0.37303832, b: 0.4094165, a: 1}
+  - m_RefCount: 1
+    m_Data: {r: 0.8704713, g: 0.358696, b: 0.4015117, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -833,6 +837,21 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
 --- !u!114 &5026113857525124214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12395, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: Palette Settings
+  m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.GridPalette
+  cellSizing: 0
+  m_TransparencySortMode: 0
+  m_TransparencySortAxis: {x: 0, y: 0, z: 1}
+--- !u!114 &448454042178718967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(ItemCollectAnimationPlayer))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class PlantingPlayer : MonoBehaviour
 {
     private static readonly int AnimPropHarvest = Animator.StringToHash("Harvest");
@@ -18,6 +19,8 @@ public class PlantingPlayer : MonoBehaviour
     [SerializeField] private Tile highlightTile;
     private readonly Dictionary<Vector3Int, CellData> _fieldData = new();
     private Animator _anim;
+    private AudioManager _audioMan;
+    private AudioSource _audioSource;
     private ItemCollectAnimationPlayer _collectItemAnimPlayer;
     private GameStateManager _gsm;
     private InventoryHolder _hotbarHolder;
@@ -27,7 +30,10 @@ public class PlantingPlayer : MonoBehaviour
     {
         _anim = GetComponent<Animator>();
         _collectItemAnimPlayer = GetComponent<ItemCollectAnimationPlayer>();
+        _audioSource = GetComponent<AudioSource>();
+        _audioMan = FindFirstObjectByType<AudioManager>();
         _gsm = FindFirstObjectByType<GameStateManager>();
+
         EventBus.Instance.OnDayChanged += _ =>
         {
             cropTilemap.ClearAllTiles();
@@ -100,6 +106,8 @@ public class PlantingPlayer : MonoBehaviour
                 var item = stack.TakeItem() as SeedItem;
                 if (item == null) return;
 
+                _audioSource.PlayOneShot(_audioMan.GetRandomPlantClip(), .5f);
+
                 if (stack.IsEmpty) _hotbarHolder.Hotbar.Slots[slotIndex].RemoveItemStack();
 
                 SetPlantingTileFromStage(cellPos, item.plant.Stages[0]);
@@ -118,6 +126,7 @@ public class PlantingPlayer : MonoBehaviour
         if (harvested == null) return;
         var stage = harvested.Stages[growthDay];
 
+        _audioSource.PlayOneShot(_audioMan.GetRandomHarvestClip());
         _anim.SetTrigger(AnimPropHarvest);
         cropTilemap.SetTile(cellPos, null);
 
