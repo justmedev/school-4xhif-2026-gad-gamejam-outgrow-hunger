@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6b30b84daa4e908685e0402c3b36c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI.Lose.BackgroundResizer
-  scaleMultiplier: 1.1
+  scaleMultiplier: 1.01
 --- !u!1 &1109111556 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6501910160793453946, guid: 39034943c422050418ef033ff74a08fc, type: 3}
@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6b30b84daa4e908685e0402c3b36c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI.Lose.BackgroundResizer
-  scaleMultiplier: 1.1
+  scaleMultiplier: 1.01
 --- !u!1001 &1742179783
 PrefabInstance:
   m_ObjectHideFlags: 0
