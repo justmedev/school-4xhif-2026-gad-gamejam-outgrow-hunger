@@ -12,5 +12,6 @@ namespace UI.Game
         Label Health,
         Label Day,
         Image RoomImage,
-        Image NightBackground);
+        Image NightBackground,
+        VisualElement TutorialVe);
 }
