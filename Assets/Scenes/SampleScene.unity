@@ -153,6 +153,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d7260d25d68b3e4198f3e32d5a4daa1f, type: 2}
   - {fileID: 11400000, guid: 79a7f4b197e703347bbd02f7655ebe6e, type: 2}
   - {fileID: 11400000, guid: d9bfa35de49286248a73396e4c33394a, type: 2}
+  - {fileID: 11400000, guid: 56dca018dbcb5e54799139706070a511, type: 2}
   startItems:
   - {fileID: 11400000, guid: d9bfa35de49286248a73396e4c33394a, type: 2}
   doc: {fileID: 1985372252}

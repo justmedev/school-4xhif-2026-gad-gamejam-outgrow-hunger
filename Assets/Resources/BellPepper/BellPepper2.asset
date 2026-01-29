@@ -16,5 +16,5 @@ MonoBehaviour:
   animatedSprites:
   - {fileID: -1481462478, guid: 275b0f786b8a2e44ba7ae8d4527de64e, type: 3}
   - {fileID: 1993134736, guid: 275b0f786b8a2e44ba7ae8d4527de64e, type: 3}
-  doubleSeedChance: 0.2
-  saturation: 2
+  doubleSeedChance: 0.3
+  saturation: 3
