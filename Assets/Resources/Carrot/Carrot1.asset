@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Carrot1
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.PlantStage
   sprite: {fileID: -711501682, guid: 19c1864955192ea40af52d8058e8dbf0, type: 3}
-  doubleSeedChance: 0.1
+  animatedSprites: []
+  doubleSeedChance: 0.01
   saturation: 1

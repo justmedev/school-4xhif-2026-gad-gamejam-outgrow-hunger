@@ -154,7 +154,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 79a7f4b197e703347bbd02f7655ebe6e, type: 2}
   - {fileID: 11400000, guid: d9bfa35de49286248a73396e4c33394a, type: 2}
   startItems:
-  - {fileID: 11400000, guid: d7260d25d68b3e4198f3e32d5a4daa1f, type: 2}
+  - {fileID: 11400000, guid: d9bfa35de49286248a73396e4c33394a, type: 2}
   doc: {fileID: 1985372252}
 --- !u!4 &64101953
 Transform:
@@ -501,15 +501,15 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00234375
-    y: 0.006795017
-    width: 0.9953126
-    height: 0.98640996
+    x: 0
+    y: 0
+    width: 1
+    height: 1.0002977
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.375
+  orthographic size: 4.3125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -51065,7 +51065,6 @@ SceneRoots:
   - {fileID: 1363872233}
   - {fileID: 1309232922}
   - {fileID: 1677424827}
-  - {fileID: 1363872233}
   - {fileID: 64101953}
   - {fileID: 1936532620}
   - {fileID: 1616402584}
