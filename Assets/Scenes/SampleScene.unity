@@ -499,15 +499,15 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1.0002977
+    x: 0.0010224949
+    y: 0.0037037036
+    width: 0.99795496
+    height: 0.9925926
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 4.1875
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -746,6 +746,16 @@ Tilemap:
   m_GameObject: {fileID: 756729452}
   m_Enabled: 1
   m_Tiles:
+  - first: {x: -13, y: -10, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 5
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: -13, y: -9, z: 0}
     second:
       serializedVersion: 2
@@ -1515,8 +1525,6 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileSpriteArray:
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 21
     m_Data: {fileID: -544333274, guid: 738989a7fe0af9f4d81ab86f1e5c773f, type: 3}
   - m_RefCount: 1
@@ -1525,6 +1533,8 @@ Tilemap:
     m_Data: {fileID: -139668126, guid: 738989a7fe0af9f4d81ab86f1e5c773f, type: 3}
   - m_RefCount: 21
     m_Data: {fileID: 1487382434, guid: 738989a7fe0af9f4d81ab86f1e5c773f, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 1
@@ -1701,8 +1711,8 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1181480085
-  m_SortingLayer: 5
+  m_SortingLayerID: 1070619989
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -1710,7 +1720,7 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
-  m_Mode: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
 --- !u!1839735485 &1073207116
 Tilemap:
