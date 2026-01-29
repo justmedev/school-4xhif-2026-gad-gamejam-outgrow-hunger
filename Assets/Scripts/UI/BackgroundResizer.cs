@@ -4,7 +4,7 @@ namespace UI.Lose
 {
     public class BackgroundResizer : MonoBehaviour
     {
-        private const float ScaleMultiplier = 1.1f;
+        private const float ScaleMultiplier = 1.15f;
 
         private Camera _cam;
         private RectTransform _rectTransform;
