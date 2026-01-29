@@ -5,13 +5,16 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Animator))]
 public class CompostBin : MonoBehaviour
 {
+    private static readonly int AnimPropIsFull = Animator.StringToHash("IsFull");
     [SerializeField] private UIDocument worldDoc;
     [SerializeField] private float interactRange;
     [SerializeField] private ContactFilter2D castFilter;
     [SerializeField] private int currentContents;
     [SerializeField] private int requiredContents = 5;
+    private Animator _anim;
     private AudioManager _audioMan;
     private AudioSource _audioSource;
     private InventoryHolder _hb;
@@ -24,12 +27,14 @@ public class CompostBin : MonoBehaviour
         _audioMan = FindFirstObjectByType<AudioManager>();
         _popupPlayer = FindFirstObjectByType<ItemCollectAnimationPlayer>();
 
+        _anim = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
 
         _progressBar = worldDoc.rootVisualElement.Q<ProgressBar>("ComposterProgress");
         _progressBar.value = currentContents;
         _progressBar.highValue = requiredContents;
         _progressBar.title = "Composter";
+        UpdateContent(0);
 
         InputSystem.actions.FindAction("Interact").performed += _ =>
         {
@@ -55,7 +60,7 @@ public class CompostBin : MonoBehaviour
                     item.GetSprite()
                 );
 
-                currentContents++;
+                UpdateContent(currentContents + 1);
                 _progressBar.value = currentContents;
                 if (currentContents >= requiredContents)
                 {
@@ -71,7 +76,13 @@ public class CompostBin : MonoBehaviour
         _hb.UnlockItem(seed);
 
         _hb.FillFirstAvailableSpace(new ItemStack(seed, 2));
-        currentContents = 0;
+        UpdateContent(0);
+    }
+
+    private void UpdateContent(int newContent)
+    {
+        currentContents = newContent;
         _progressBar.value = currentContents;
+        _anim.SetBool(AnimPropIsFull, currentContents - 1 >= requiredContents / 2);
     }
 }
