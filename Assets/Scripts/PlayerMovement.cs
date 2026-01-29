@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private static readonly int AnimPropMoveX = Animator.StringToHash("MoveX");
     private static readonly int AnimPropMoveY = Animator.StringToHash("MoveY");
     private static readonly int AnimPropIsMoving = Animator.StringToHash("IsMoving");
+    private static readonly int AnimPropHarvestOrPlant = Animator.StringToHash("Harvest");
 
     [SerializeField] private float secondsBetweenStepSounds = .55f;
     [SerializeField] private float speed;
@@ -75,5 +76,6 @@ public class PlayerMovement : MonoBehaviour
         // Only update X and Y when moving to preserve "Facing" direction for Idle
         _anim.SetFloat(AnimPropMoveX, move.x);
         _anim.SetFloat(AnimPropMoveY, move.y);
+        _anim.ResetTrigger(AnimPropHarvestOrPlant);
     }
 }

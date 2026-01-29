@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using IMS;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -43,9 +42,7 @@ public class CompostBin : MonoBehaviour
 
         InputSystem.actions.FindAction("Interact").performed += _ =>
         {
-            var results = new List<RaycastHit2D>();
-            Physics2D.CircleCast(transform.position, 1f, Vector2.zero, castFilter, results);
-            if (results.Count <= 0 || !_isPlayerInRange) return;
+            if (!_isPlayerInRange) return;
 
             var slot = _hb.Hotbar.Slots[_hb.SelectedInventorySlotIndex];
             if (slot.IsEmpty) return;
@@ -91,7 +88,7 @@ public class CompostBin : MonoBehaviour
         var seed = _hb.GetRandomLockedItem();
         _hb.UnlockItem(seed);
 
-        _hb.FillFirstAvailableSpace(new ItemStack(seed, 2));
+        _hb.FillFirstAvailableSpace(new ItemStack(seed, 1));
         UpdateContent(0);
     }
 
