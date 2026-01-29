@@ -13,11 +13,12 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(PlayerInteractionNotifier))]
 public class PlantingPlayer : MonoBehaviour
 {
-    private static readonly int AnimPropHarvest = Animator.StringToHash("Harvest");
+    private static readonly int AnimPropHarvestOrPlant = Animator.StringToHash("Harvest");
     [SerializeField] private Tilemap highlightTilemap;
     [SerializeField] private Tilemap cropTilemap;
     [SerializeField] private Tilemap fieldTilemap;
     [SerializeField] private Tile highlightTile;
+    [SerializeField] private Transform interactionPivot;
     private readonly Dictionary<Vector3Int, CellData> _fieldData = new();
     private Animator _anim;
     private AudioManager _audioMan;
@@ -27,7 +28,7 @@ public class PlantingPlayer : MonoBehaviour
     private InventoryHolder _hotbarHolder;
     private InputAction _interactAction;
     private PlayerInteractionNotifier _interactionNotifier;
-    private bool _wasHighlightedLastFrame = false;
+    private bool _wasHighlightedLastFrame;
 
     private void Start()
     {
@@ -65,7 +66,7 @@ public class PlantingPlayer : MonoBehaviour
     private void Update()
     {
         highlightTilemap.ClearAllTiles();
-        var cellPos = fieldTilemap.WorldToCell(transform.position);
+        var cellPos = fieldTilemap.WorldToCell(interactionPivot.position);
         if (!_fieldData.ContainsKey(cellPos))
         {
             if (_wasHighlightedLastFrame) _interactionNotifier.HidePressEMessage();
@@ -100,7 +101,7 @@ public class PlantingPlayer : MonoBehaviour
 
     private void HandleCropFieldInteraction()
     {
-        var cellPos = fieldTilemap.WorldToCell(transform.position);
+        var cellPos = fieldTilemap.WorldToCell(interactionPivot.position);
         try
         {
             var cell = _fieldData[cellPos];
@@ -117,6 +118,7 @@ public class PlantingPlayer : MonoBehaviour
             {
                 var item = stack.TakeItem() as SeedItem;
                 if (item == null) return;
+                _anim.SetTrigger(AnimPropHarvestOrPlant);
 
                 _audioSource.PlayOneShot(_audioMan.GetRandomPlantClip(), .5f);
 
@@ -139,7 +141,7 @@ public class PlantingPlayer : MonoBehaviour
         var stage = harvested.Stages[growthDay];
 
         _audioSource.PlayOneShot(_audioMan.GetRandomHarvestClip());
-        _anim.SetTrigger(AnimPropHarvest);
+        _anim.SetTrigger(AnimPropHarvestOrPlant);
         cropTilemap.SetTile(cellPos, null);
 
         var seedQty = 1;
