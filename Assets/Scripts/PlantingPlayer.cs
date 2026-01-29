@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(ItemCollectAnimationPlayer))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(PlayerInteractionNotifier))]
 public class PlantingPlayer : MonoBehaviour
 {
     private static readonly int AnimPropHarvest = Animator.StringToHash("Harvest");
@@ -25,9 +26,12 @@ public class PlantingPlayer : MonoBehaviour
     private GameStateManager _gsm;
     private InventoryHolder _hotbarHolder;
     private InputAction _interactAction;
+    private PlayerInteractionNotifier _interactionNotifier;
+    private bool _wasHighlightedLastFrame = false;
 
     private void Start()
     {
+        _interactionNotifier = GetComponent<PlayerInteractionNotifier>();
         _anim = GetComponent<Animator>();
         _collectItemAnimPlayer = GetComponent<ItemCollectAnimationPlayer>();
         _audioSource = GetComponent<AudioSource>();
@@ -62,8 +66,16 @@ public class PlantingPlayer : MonoBehaviour
     {
         highlightTilemap.ClearAllTiles();
         var cellPos = fieldTilemap.WorldToCell(transform.position);
-        if (!_fieldData.ContainsKey(cellPos)) return;
+        if (!_fieldData.ContainsKey(cellPos))
+        {
+            if (_wasHighlightedLastFrame) _interactionNotifier.HidePressEMessage();
+            _wasHighlightedLastFrame = false;
+            return;
+        }
+
         highlightTilemap.SetTile(cellPos, highlightTile);
+        _interactionNotifier.ShowPressEMessage();
+        _wasHighlightedLastFrame = true;
     }
 
     private void SetPlantingTileFromStage(Vector3Int cellPos, [NotNull] PlantStage stage)

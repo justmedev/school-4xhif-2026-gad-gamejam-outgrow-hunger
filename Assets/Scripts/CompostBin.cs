@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using IMS;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Collider2D))]
 public class CompostBin : MonoBehaviour
 {
     private static readonly int AnimPropIsFull = Animator.StringToHash("IsFull");
@@ -18,11 +20,14 @@ public class CompostBin : MonoBehaviour
     private AudioManager _audioMan;
     private AudioSource _audioSource;
     private InventoryHolder _hb;
+    private PlayerInteractionNotifier _interactionNotifier;
+    private bool _isPlayerInRange = false;
     private ItemCollectAnimationPlayer _popupPlayer;
     private ProgressBar _progressBar;
 
     public void Start()
     {
+        _interactionNotifier = FindFirstObjectByType<PlayerInteractionNotifier>();
         _hb = FindFirstObjectByType<InventoryHolder>();
         _audioMan = FindFirstObjectByType<AudioManager>();
         _popupPlayer = FindFirstObjectByType<ItemCollectAnimationPlayer>();
@@ -40,10 +45,7 @@ public class CompostBin : MonoBehaviour
         {
             var results = new List<RaycastHit2D>();
             Physics2D.CircleCast(transform.position, 1f, Vector2.zero, castFilter, results);
-            if (results.Count <= 0) return;
-
-            var player = results.Find(r => r.transform.CompareTag("Player"));
-            if (!player) return;
+            if (results.Count <= 0 || !_isPlayerInRange) return;
 
             var slot = _hb.Hotbar.Slots[_hb.SelectedInventorySlotIndex];
             if (slot.IsEmpty) return;
@@ -68,6 +70,20 @@ public class CompostBin : MonoBehaviour
                 }
             });
         };
+    }
+
+    private void OnTriggerEnter2D([NotNull] Collider2D other)
+    {
+        if (!other.CompareTag("Player")) return;
+        _isPlayerInRange = true;
+        _interactionNotifier.ShowPressEMessage();
+    }
+
+    private void OnTriggerExit2D([NotNull] Collider2D other)
+    {
+        if (!other.CompareTag("Player")) return;
+        _isPlayerInRange = false;
+        _interactionNotifier.HidePressEMessage();
     }
 
     private void EmptyComposter()

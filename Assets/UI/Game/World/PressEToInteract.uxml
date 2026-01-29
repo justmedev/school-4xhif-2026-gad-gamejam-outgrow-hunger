@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd"
+         editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MainStyle.uss?fileID=7433441132597879392&amp;guid=002115899abc1014d8549fb254dca04e&amp;type=3#MainStyle"/>
+    <ui:VisualElement
+            style="flex-grow: 0; flex-direction: row; background-color: rgb(241, 208, 167); padding-top: 0; padding-right: 5px; padding-bottom: 0; padding-left: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; width: 68px;">
+        <ui:Label text="Press"
+                  style="margin-right: 0; color: rgb(95, 80, 62); font-size: 15px; margin-top: 0; margin-left: 0; margin-bottom: 0; -unity-text-align: middle-left;"/>
+        <ui:Image
+                style="background-image: url(&quot;project://database/Assets/Textures/Keyboard%20Letters%20and%20Symbols.png?fileID=-173530099807541425&amp;guid=8d8ad2fcf9d83223f8cd0e045db91947&amp;type=3#Keyboard Letters and Symbols_20&quot;); width: 50px; aspect-ratio: 1;"/>
+    </ui:VisualElement>
+</ui:UXML>
