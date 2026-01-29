@@ -39,11 +39,12 @@ namespace UI.Game
 
         private void OnEnable()
         {
+            
             _gsm = FindFirstObjectByType<GameStateManager>();
             _ui = GetComponent<UIDocument>();
             _audioMan = FindFirstObjectByType<AudioManager>();
             _audioSource = GetComponent<AudioSource>();
-
+            
             var root = _ui.rootVisualElement;
             _controls = new GameControls(
                 root.Q<VisualElement>("NightVE"),
@@ -55,10 +56,13 @@ namespace UI.Game
                 root.Q<Label>("Health"),
                 root.Q<Label>("Day"),
                 root.Q<Image>("NightImage"),
-                root.Q<Image>("NightBackground")
+                root.Q<Image>("NightBackground"),
+                root.Q<VisualElement>("TutorialVE")
             );
             _controls.ReturnToGameButton.clicked += ResumeGame;
             _controls.ExitButton.clicked += ExitGame;
+            
+            _controls.TutorialVe.style.display = DisplayStyle.Flex;
 
             SwitchToDayUI();
 
@@ -103,6 +107,11 @@ namespace UI.Game
                 }
 
                 ResumeGame();
+            };
+
+            InputSystem.actions.FindAction("Interact").performed += _ =>
+            {
+                _controls.TutorialVe.style.display = DisplayStyle.None;
             };
         }
 

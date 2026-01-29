@@ -49,7 +49,10 @@ namespace IMS.UI
             {
                 style =
                 {
-                    width = _options.Spacing * (_inventory.Cols + 1) + _options.SlotSize * _inventory.Cols,
+                    // TODO: Actually fix this issues because this will break multi-row inventories
+                    // BUG: width calculated too small in constant physical size mode which causes
+                    // inventory to wrap early
+                    // width = _options.Spacing * (_inventory.Cols + 1) + _options.SlotSize * _inventory.Cols,
                     flexGrow = 0
                 }
             };
