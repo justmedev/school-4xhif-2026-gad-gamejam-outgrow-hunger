@@ -4,29 +4,31 @@ namespace UI.Lose
 {
     public class BackgroundResizer : MonoBehaviour
     {
-        public float scaleMultiplier = 1.1f;
+        private const float ScaleMultiplier = 1.1f;
 
         private Camera _cam;
         private RectTransform _rectTransform;
         private SpriteRenderer _spriteRenderer;
 
-        void Awake()
+        private void Awake()
         {
             _cam = Camera.main;
             _rectTransform = GetComponent<RectTransform>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        void LateUpdate()
+        private void Update()
         {
             if (!_cam) return;
 
             if (_rectTransform)
             {
-                _rectTransform.sizeDelta = new Vector2(
-                    Screen.width * scaleMultiplier,
-                    Screen.height * scaleMultiplier
-                );
+                float scale = Mathf.Max(
+                    Screen.width / _rectTransform.rect.width,
+                    Screen.height / _rectTransform.rect.height
+                ) * ScaleMultiplier;
+
+                _rectTransform.localScale = Vector3.one * scale;
             }
             else if (_spriteRenderer && _cam.orthographic)
             {
@@ -35,11 +37,12 @@ namespace UI.Lose
 
                 Vector2 spriteSize = _spriteRenderer.sprite.bounds.size;
 
-                transform.localScale = new Vector3(
-                    camWidth / spriteSize.x * scaleMultiplier,
-                    camHeight / spriteSize.y * scaleMultiplier,
-                    1f
-                );
+                float scale = Mathf.Max(
+                    camWidth / spriteSize.x,
+                    camHeight / spriteSize.y
+                ) * ScaleMultiplier;
+
+                transform.localScale = new Vector3(scale, scale, 1f);
             }
         }
     }
