@@ -135,7 +135,7 @@ public class PlantingPlayer : MonoBehaviour
         if (Random.value < stage.DoubleSeedChance) seedQty = 2;
 
         _gsm.AddSaturationLevel(stage.Saturation);
-        HotbarFillFirstAvailableSpace(new ItemStack(harvested.SeedItem, seedQty));
+        _hotbarHolder.FillFirstAvailableSpace(new ItemStack(harvested.SeedItem, seedQty));
 
         _collectItemAnimPlayer.AddToQueue(
             seedQty,
@@ -148,26 +148,6 @@ public class PlantingPlayer : MonoBehaviour
             new Vector2(transform.position.x, transform.position.y + .5f),
             harvested.ResourceSprite
         );
-    }
-
-    private void HotbarFillFirstAvailableSpace(ItemStack stack)
-    {
-        var inv = _hotbarHolder.Hotbar;
-        foreach (var slot in inv.Slots)
-        {
-            if (slot.IsEmpty || slot.ItemStack == null)
-            {
-                slot.PlaceItemStack(stack);
-                inv.PropagateChange(slot.Index);
-                return;
-            }
-
-            if (!slot.ItemStack.Equals(stack)) continue;
-
-            stack = slot.ItemStack.AddStack(stack);
-            inv.PropagateChange(slot.Index);
-            if (stack.IsEmpty) return;
-        }
     }
 
     private void AddMissingTilesToFieldData()

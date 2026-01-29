@@ -1,4 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/MainStyle.uss?fileID=7433441132597879392&amp;guid=002115899abc1014d8549fb254dca04e&amp;type=3"/>
-    <Style src="project://database/Assets/UI/Game/World/WorldSpaceStyle.uss?fileID=7433441132597879392&amp;guid=9553def0a5b832f189bdfe0bf3b1b9e1&amp;type=3#WorldSpaceStyle"/>
-</ui:UXML>

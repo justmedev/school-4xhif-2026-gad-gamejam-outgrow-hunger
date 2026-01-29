@@ -1,18 +1,24 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using IMS;
 using IMS.UI;
 using IMS.UI.DragAndDrop;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class InventoryHolder : MonoBehaviour
 {
     private const int InventoryCols = 4;
 
+    [SerializeField] private SeedItem[] items;
     [SerializeField] private SeedItem[] startItems;
     [SerializeField] private UIDocument doc;
     private readonly OnDropHandler _onDropHandler = new();
+    private readonly HashSet<SeedItem> _unlockedItems = new();
     private StyleColor _initialBgColor;
     private UQueryBuilder<VisualElement> _renderedSlots;
     public int SelectedInventorySlotIndex { get; private set; }
@@ -20,6 +26,7 @@ public class InventoryHolder : MonoBehaviour
 
     private void Start()
     {
+        _unlockedItems.AddRange(startItems);
         var inventoryRoot = doc.rootVisualElement.Q("HotbarRoot");
         Hotbar = new Inventory(
             "Hotbar",
@@ -65,6 +72,43 @@ public class InventoryHolder : MonoBehaviour
             SelectedInventorySlotIndex = (int)ctx.ReadValue<float>() - 1;
             MarkSelectedSlot();
         };
+    }
+
+    public void UnlockItem(SeedItem item)
+    {
+        _unlockedItems.Add(item);
+    }
+
+    /// <summary>
+    ///     Get a random locked item back, does not unlock it
+    /// </summary>
+    /// <returns></returns>
+    public SeedItem GetRandomLockedItem()
+    {
+        var lockedItems = items.Where(item => !_unlockedItems.Contains(item)).ToList();
+
+        return lockedItems.Count <= 0
+            ? items[Random.Range(0, items.Length - 1)]
+            : lockedItems[Random.Range(0, lockedItems.Count - 1)];
+    }
+
+    public void FillFirstAvailableSpace(ItemStack stack)
+    {
+        foreach (var slot in Hotbar.Slots)
+        {
+            if (slot.IsEmpty || slot.ItemStack == null)
+            {
+                slot.PlaceItemStack(stack);
+                Hotbar.PropagateChange(slot.Index);
+                return;
+            }
+
+            if (!slot.ItemStack.Equals(stack)) continue;
+
+            stack = slot.ItemStack.AddStack(stack);
+            Hotbar.PropagateChange(slot.Index);
+            if (stack.IsEmpty) return;
+        }
     }
 
     private void ResetSelectedSlotMarking()
