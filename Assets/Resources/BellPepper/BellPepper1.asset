@@ -14,10 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.PlantStage
   sprite: {fileID: -7712856396841174223, guid: 275b0f786b8a2e44ba7ae8d4527de64e, type: 3}
   animatedSprites: []
-<<<<<<< Updated upstream
-  doubleSeedChance: 0.1
-  saturation: 1
-=======
   doubleSeedChance: 0.005
   saturation: 0
->>>>>>> Stashed changes
