@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd"
+         editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Game/World/ComposterStyle.uss?fileID=7433441132597879392&amp;guid=824cafa00058a51d583bf9401b027aa9&amp;type=3#ComposterStyle"/>
+    <ui:ProgressBar value="2" title="Composter (2/10)" high-value="5" name="ComposterProgress" picking-mode="Ignore"
+                    style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; width: 80px;"/>
+</ui:UXML>
