@@ -44,7 +44,7 @@ public class InventoryHolder : MonoBehaviour
 
 
         if (startItems.Length > InventoryCols) throw new ArgumentException($"startItems maxlength = {InventoryCols}");
-        for (var i = 0; i < startItems.Length; i++) Hotbar.PlaceItemStack(i, new ItemStack(startItems[i], 2));
+        for (var i = 0; i < startItems.Length; i++) Hotbar.PlaceItemStack(i, new ItemStack(startItems[i], 3));
 
         _renderedSlots = doc.rootVisualElement.Query(className: InventoryUIClasses.Slot);
         _initialBgColor = _renderedSlots.First().style.backgroundColor;

@@ -91,7 +91,7 @@ public class CompostBin : MonoBehaviour
         var seed = _hb.GetRandomLockedItem();
         _hb.UnlockItem(seed);
 
-        _hb.FillFirstAvailableSpace(new ItemStack(seed, 2));
+        _hb.FillFirstAvailableSpace(new ItemStack(seed, 1));
         UpdateContent(0);
     }
 
