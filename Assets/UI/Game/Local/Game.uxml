@@ -9,8 +9,18 @@
                     <ui:Label text="10/10" name="Saturation" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: upper-right;"/>
                 </ui:VisualElement>
                 <ui:VisualElement style="align-items: flex-start; justify-content: flex-start; align-self: flex-start; margin-left: 10px;">
-                    <ui:Label text="Health" name="" style="padding-bottom: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-left: 0; -unity-text-align: middle-right;"/>
-                    <ui:Label text="Saturation" name="" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: upper-right;"/>
+                    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                        <ui:Image
+                                style="background-image: url(&quot;project://database/Assets/Textures/Icons.png?fileID=1161201145128540330&amp;guid=08440307a233c3b4c847a8a37bb1d7a5&amp;type=3#Icons_0&quot;); aspect-ratio: 1;"/>
+                        <ui:Label text="Health" name=""
+                                  style="padding-bottom: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 5px; padding-top: 0; padding-right: 0; padding-left: 0; -unity-text-align: middle-right;"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                        <ui:Image
+                                style="aspect-ratio: 1; background-image: url(&quot;project://database/Assets/Textures/Icons.png?fileID=1202984965197363600&amp;guid=08440307a233c3b4c847a8a37bb1d7a5&amp;type=3#Icons_3&quot;); margin-right: 0;"/>
+                        <ui:Label text="Saturation" name=""
+                                  style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 5px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: upper-right;"/>
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="" style="flex-grow: 0; flex-direction: row;">
@@ -36,7 +46,8 @@
             <ui:Button text="Exit Game" name="ExitGameButton" style="width: 100%;"/>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="TutorialVE" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 0; bottom: 0; flex-direction: column; justify-content: center;">
+    <ui:VisualElement name="TutorialVE"
+                      style="flex-grow: 1; position: absolute; left: 1px; top: 1px; right: 0; bottom: 0; flex-direction: column; justify-content: center;">
         <ui:Label
                 text="Health is how many days your children can survive without Food.&#10;Saturation is how much Food you gathered during the day.&#10;Saturation resets at night.&#10;The composter is used to unlock new seed types.&#10;When you go to the house and press Interact, you go to sleep.&#10;&#10;Press E to dismiss."
                 name="TutorialText"
