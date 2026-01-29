@@ -12,8 +12,10 @@ using Random = UnityEngine.Random;
 public class PlantingPlayer : MonoBehaviour
 {
     private static readonly int AnimPropHarvest = Animator.StringToHash("Harvest");
+    [SerializeField] private Tilemap highlightTilemap;
     [SerializeField] private Tilemap cropTilemap;
     [SerializeField] private Tilemap fieldTilemap;
+    [SerializeField] private Tile highlightTile;
     private readonly Dictionary<Vector3Int, CellData> _fieldData = new();
     private Animator _anim;
     private ItemCollectAnimationPlayer _collectItemAnimPlayer;
@@ -50,10 +52,31 @@ public class PlantingPlayer : MonoBehaviour
         AddMissingTilesToFieldData();
     }
 
+    private void Update()
+    {
+        highlightTilemap.ClearAllTiles();
+        var cellPos = fieldTilemap.WorldToCell(transform.position);
+        if (!_fieldData.ContainsKey(cellPos)) return;
+        highlightTilemap.SetTile(cellPos, highlightTile);
+    }
+
     private void SetPlantingTileFromStage(Vector3Int cellPos, [NotNull] PlantStage stage)
     {
-        var tile = ScriptableObject.CreateInstance<Tile>();
-        tile.sprite = stage.Sprite;
+        TileBase tile;
+        if (stage.AnimatedSprites.Length == 0)
+        {
+            tile = ScriptableObject.CreateInstance<Tile>();
+            ((Tile)tile).sprite = stage.Sprite;
+        }
+        else
+        {
+            tile = ScriptableObject.CreateInstance<AnimatedTile>();
+            var animated = (AnimatedTile)tile;
+            animated.m_AnimatedSprites = stage.AnimatedSprites;
+            animated.m_MinSpeed = 1;
+            animated.m_MaxSpeed = 1;
+        }
+
         cropTilemap.SetTile(cellPos, tile);
     }
 
